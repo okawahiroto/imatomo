@@ -69,11 +69,9 @@
 
     var ref = new Firebase('https://resplendent-inferno-2076.firebaseio.com/shitailist');
     // Firebaseに追加
-    console.log(1);
+
     var messages = vm.$firebaseArray(ref);
-    console.log(shitai);
     messages.$add(shitai);
-    console.log(3);
 
     // shitailistへ
     vm.$location.path('shitailist');
