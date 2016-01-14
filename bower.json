@@ -1,0 +1,21 @@
+{
+  "name": "imatomo",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.3",
+    "angular-new-router": "~0.5.3",
+    "angular-resource": "~1.4.3"
+  },
+  "overrides": {
+    "angular-new-router": {
+      "main": "dist/router.es5.js"
+    },
+    "bootstrap": {
+      "main": "dist/css/bootstrap.css"
+    }
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.4.3"
+  }
+}
