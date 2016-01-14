@@ -1,7 +1,17 @@
-# ‚¢‚Ü‚Æ‚à(‰¼)
+# ã„ã¾ã¨ã‚‚(ä»®)
 
-ƒ`[ƒ€Fƒuƒ‹[‚R‚É‚æ‚é u››‚µ‚½‚¢v’‡ŠÔ‚ğW‚ß‚éƒAƒvƒŠB
+ãƒãƒ¼ãƒ ï¼šãƒ–ãƒ«ãƒ¼ï¼“ã«ã‚ˆã‚‹ ã€Œâ—‹â—‹ã—ãŸã„ã€ä»²é–“ã‚’é›†ã‚ã‚‹ã‚¢ãƒ—ãƒªã€‚
 
-* ‘åìƒŠ[ƒ_
-* “¡‰ª
-* Â‰®
+* å¤§å·ãƒªãƒ¼ãƒ€
+* è—¤å²¡
+* é’å±‹
+
+# How to create Development environment
+
+> mkdir imatomo & cd imatomo
+> git clone https://github.com/okawahiroto/imatomo.git
+> npm install
+> bower install
+
+# How to run
+> grunt serve
