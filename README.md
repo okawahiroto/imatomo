@@ -8,10 +8,11 @@
 
 # How to create Development environment
 
-> mkdir imatomo & cd imatomo
-> git clone https://github.com/okawahiroto/imatomo.git
-> npm install
-> bower install
+* mkdir imatomo & cd imatomo  
+* git clone https://github.com/okawahiroto/imatomo.git  
+* npm install
+* bower install
 
 # How to run
-> grunt serve
+
+* grunt serve
