@@ -10,17 +10,23 @@
     .module('imatomo', [
       'ngNewRouter',
       'imatomo.config',
-      'imatomo.components.home',
-      'imatomo.components.about',
-      'imatomo.components.contact'
+      'imatomo.components.shitailist',
+      'imatomo.components.shitai',
+      'imatomo.components.group',
+      'imatomo.components.profile',
+      'imatomo.components.shitaidetail',
+      'imatomo.components.groupdetail'
     ])
     .controller('AppController', AppController);
 
   AppController.$routeConfig = [
-    {path: '/',       redirectTo: '/home'},
-    {path: '/home',    component: 'home'},
-    {path: '/about',   component: 'about'},
-    {path: '/contact', component: 'contact'}
+    {path: '/',       redirectTo: '/shitailist'},
+    {path: '/shitailist',    component: 'shitailist'},
+    {path: '/shitai',    component: 'shitai'},
+    {path: '/group',    component: 'group'},
+    {path: '/profile',    component: 'profile'},
+    {path: '/shitaidetail',    component: 'shitaidetail'},
+    {path: '/groupdetail',    component: 'groupdetail'}
   ];
 
   AppController.$inject = [];

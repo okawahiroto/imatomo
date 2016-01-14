@@ -16,8 +16,30 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // bower:js
+      'bower_components/jquery/dist/jquery.js',
+      'bower_components/angular/angular.js',
+      'bower_components/angular-new-router/dist/router.es5.js',
+      'bower_components/angular-resource/angular-resource.js',
+      'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       // injector:js
+      'app/components/group/group.js',
+      'app/components/groupdetail/groupdetail.js',
+      'app/components/profile/profile.js',
+      'app/components/shitai/shitai.js',
+      'app/components/shitaidetail/shitaidetail.js',
+      'app/components/shitailist/shitailist.js',
+      'app/scripts/config.js',
+      'app/service/gruntfiles/gruntfiles.js',
+      'test/components/group/group.spec.js',
+      'test/components/groupdetail/groupdetail.spec.js',
+      'test/components/profile/profile.spec.js',
+      'test/components/shitai/shitai.spec.js',
+      'test/components/shitaidetail/shitaidetail.spec.js',
+      'test/components/shitailist/shitailist.spec.js',
+      'test/main.spec.js',
+      'test/service/gruntfiles/gruntfiles.mock.js',
+      'test/service/gruntfiles/gruntfiles.spec.js',
       // endinjector
       'app/scripts/main.js',
       'test/main.spec.js'
