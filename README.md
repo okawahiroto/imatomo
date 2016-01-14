@@ -26,5 +26,6 @@ Firebase で管理する公言情報JSONは以下の通り
 * title       ：○○したい！
 * time        ：いつ
 * place       ：どこで
+* comment     ：コメント
 * craetetimestamp ：登録日時
 
