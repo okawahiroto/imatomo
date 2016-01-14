@@ -54,18 +54,26 @@
 
     var userObj = JSON.parse(user);
 
+    // したいID
+    var shitaiid = createShitaiId();
+    console.info(shitaiid);
     var shitai = {
+      shitaiid : shitaiid,
       userid : userObj.userid,
       username : userObj.username,
       title: vm.title,
       time: vm.time,
-      place: vm.place
+      place: (vm.place === undefined ? '' : vm.place),
+      createtimestamp : Firebase.ServerValue.TIMESTAMP
     };
 
     var ref = new Firebase('https://resplendent-inferno-2076.firebaseio.com/shitailist');
     // Firebaseに追加
+    console.log(1);
     var messages = vm.$firebaseArray(ref);
+    console.log(shitai);
     messages.$add(shitai);
+    console.log(3);
 
     // shitailistへ
     vm.$location.path('shitailist');
@@ -86,6 +94,20 @@
     console.log('close');
     vm.status = '';
     vm.message = '';
+  };
+
+  /**
+   * 採番
+   */
+  var createShitaiId = function() {
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+  };
+
+  var s4 = function() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
   };
 
 })();
