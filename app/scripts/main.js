@@ -10,6 +10,7 @@
     .module('imatomo', [
       'ngNewRouter',
       'imatomo.config',
+      'firebase',
       'imatomo.components.shitailist',
       'imatomo.components.shitai',
       'imatomo.components.group',

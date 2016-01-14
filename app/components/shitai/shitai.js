@@ -10,7 +10,7 @@
     .module('imatomo.components.shitai', [])
     .controller('ShitaiController', ShitaiController);
 
-  ShitaiController.$inject = [];
+  ShitaiController.$inject = ['$firebaseArray', '$location'];
 
   /**
    * ShitaiController
@@ -18,8 +18,10 @@
    * @class ShitaiController
    * @constructor
    */
-  function ShitaiController() {
+  function ShitaiController($firebaseArray, $location) {
     console.log('ShitaiController Constructor');
+    this.$firebaseArray = $firebaseArray;
+    this.$location = $location;
   }
 
   /**
@@ -34,10 +36,56 @@
   };
 
   /**
+   * @method register
+   */
+  ShitaiController.prototype.register = function() {
+    console.log('ShitaiController register Method');
+
+    // ローカルストレージからユーザ情報を取得
+    var localStorage = window.localStorage;
+    var user = localStorage.getItem('user');
+
+    // なければ終了
+    if (!user) {
+      vm.status = 'dengire';
+      vm.message = 'ユーザ登録を行ってください。';
+      return;
+    }
+
+    var userObj = JSON.parse(user);
+
+    var shitai = {
+      userid : userObj.userid,
+      username : userObj.username,
+      title: vm.title,
+      time: vm.time,
+      place: vm.place
+    };
+
+    var ref = new Firebase('https://resplendent-inferno-2076.firebaseio.com/shitailist');
+    // Firebaseに追加
+    var messages = vm.$firebaseArray(ref);
+    messages.$add(shitai);
+
+    // shitailistへ
+    vm.$location.path('shitailist');
+  };
+
+  /**
    * Angular ViewModel
    *
    * @property vm
    * @type {Object}
    */
   var vm;
+
+  /**
+   * @method closeAlert
+   */
+  ShitaiController.prototype.closeAlert = function () {
+    console.log('close');
+    vm.status = '';
+    vm.message = '';
+  };
+
 })();
