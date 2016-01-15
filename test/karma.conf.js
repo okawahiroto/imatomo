@@ -34,6 +34,7 @@ module.exports = function(config) {
       'app/scripts/config.js',
       'app/service/gruntfiles/gruntfiles.js',
       'app/service/profiles/profiles.js',
+      'app/service/shitaies/shitaies.js',
       'test/components/group/group.spec.js',
       'test/components/groupdetail/groupdetail.spec.js',
       'test/components/profile/profile.spec.js',
@@ -45,6 +46,8 @@ module.exports = function(config) {
       'test/service/gruntfiles/gruntfiles.spec.js',
       'test/service/profiles/profiles.mock.js',
       'test/service/profiles/profiles.spec.js',
+      'test/service/shitaies/shitaies.mock.js',
+      'test/service/shitaies/shitaies.spec.js',
       // endinjector
       'app/scripts/main.js',
       'test/main.spec.js'

@@ -1,12 +1,10 @@
-<div>shitailist.html</div>
-
 <table class="table table-striped">
     <tr ng-repeat="data in shitailist.items">
       <td>{{data.username}}</td>
       <td>{{data.time}}</td>
       <td>{{data.title}}</td>
       <td>{{data.createtimestamp | date : 'M/dd HH:mm'}}</td>
-      <td><button type="button" class="btn btn-default">詳細</button></td>
+      <td><button type="button" class="btn btn-default" ng-click="shitailist.moveDetail(data.$id)">詳細</button></td>
       <td><button type="button" class="btn btn-danger">賛同する</button></td>
     </tr>
 </table>

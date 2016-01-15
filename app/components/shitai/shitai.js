@@ -7,10 +7,13 @@
   'use strict';
 
   angular
-    .module('imatomo.components.shitai', [])
+    .module('imatomo.components.shitai', [
+      'imatomo.service.shitaies',
+      'imatomo.service.profiles'
+    ])
     .controller('ShitaiController', ShitaiController);
 
-  ShitaiController.$inject = ['$firebaseArray', '$location'];
+  ShitaiController.$inject = ['$location', 'ShitaiesService', 'ProfilesService'];
 
   /**
    * ShitaiController
@@ -18,10 +21,11 @@
    * @class ShitaiController
    * @constructor
    */
-  function ShitaiController($firebaseArray, $location) {
+  function ShitaiController($location, ShitaiesService, ProfilesService) {
     console.log('ShitaiController Constructor');
-    this.$firebaseArray = $firebaseArray;
     this.$location = $location;
+    this.ShitaiesService = ShitaiesService;
+    this.ProfilesService = ProfilesService;
   }
 
   /**
@@ -41,26 +45,18 @@
   ShitaiController.prototype.register = function() {
     console.log('ShitaiController register Method');
 
-    // ローカルストレージからユーザ情報を取得
-    var localStorage = window.localStorage;
-    var user = localStorage.getItem('user');
+    var profile = vm.ProfilesService.findProfile();
 
     // なければ終了
-    if (!user) {
+    if (!profile) {
       vm.status = 'dengire';
       vm.message = 'ユーザ登録を行ってください。';
       return;
     }
 
-    var userObj = JSON.parse(user);
-
-    // したいID
-    var shitaiid = createShitaiId();
-    console.info(shitaiid);
     var shitai = {
-      shitaiid : shitaiid,
-      userid : userObj.userid,
-      username : userObj.username,
+      userid : profile.userid,
+      username : profile.username,
       title: vm.title,
       time: vm.time,
       comment : (vm.comment === undefined ? '' : vm.comment),
@@ -68,13 +64,10 @@
       createtimestamp : Firebase.ServerValue.TIMESTAMP
     };
 
-    var ref = new Firebase('https://resplendent-inferno-2076.firebaseio.com/shitailist');
     // Firebaseに追加
+    vm.ShitaiesService.addShitai(shitai);
 
-    var messages = vm.$firebaseArray(ref);
-    messages.$add(shitai);
-
-    // shitailistへ
+    // shitailistへ遷移
     vm.$location.path('shitailist');
   };
 
@@ -93,20 +86,6 @@
     console.log('close');
     vm.status = '';
     vm.message = '';
-  };
-
-  /**
-   * 採番
-   */
-  var createShitaiId = function() {
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-      s4() + '-' + s4() + s4() + s4();
-  };
-
-  var s4 = function() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
   };
 
 })();

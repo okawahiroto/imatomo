@@ -7,10 +7,13 @@
   'use strict';
 
   angular
-    .module('imatomo.components.shitaidetail', [])
+    .module('imatomo.components.shitaidetail', [
+      'imatomo.service.shitaies',
+      'imatomo.service.profiles'
+    ])
     .controller('ShitaidetailController', ShitaidetailController);
 
-  ShitaidetailController.$inject = [];
+  ShitaidetailController.$inject = ['$routeParams', 'ShitaiesService', 'ProfilesService'];
 
   /**
    * ShitaidetailController
@@ -18,8 +21,11 @@
    * @class ShitaidetailController
    * @constructor
    */
-  function ShitaidetailController() {
+  function ShitaidetailController($routeParams, ShitaiesService, ProfilesService) {
     console.log('ShitaidetailController Constructor');
+    this.id = $routeParams.id;
+    this.ShitaiesService = ShitaiesService;
+    this.ProfilesService = ProfilesService;
   }
 
   /**
@@ -31,16 +37,8 @@
   ShitaidetailController.prototype.activate = function() {
     console.log('ShitaidetailController activate Method');
     vm = this;
-    var ref = new Firebase('https://resplendent-inferno-2076.firebaseio.com/shitailist');
-    var shitailist = vm.$firebaseArray(ref);
 
-    /*for (var sItem in shitailist) {
-      var sid = sItem.shitaiid;
-      if (sid == $shitaiid) {
-        setShitaiItem(sItem);
-        //exit;
-      }
-    }*/
+    setShitaiItem(vm.ShitaiesService.findShitai(vm.id));
   };
 
   /**
@@ -56,7 +54,8 @@
    * @private
    */
   var setShitaiItem = function (shitaiItem) {
-    vm.shitaiid    = shitaiItem.shitaiid;
+    console.log(shitaiItem);
+    vm.id          = shitaiItem.$id;
     vm.userid      = shitaiItem.userid;
     vm.username    = shitaiItem.username;
     vm.title       = shitaiItem.title;

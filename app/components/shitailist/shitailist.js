@@ -7,10 +7,12 @@
   'use strict';
 
   angular
-    .module('imatomo.components.shitailist', [])
+    .module('imatomo.components.shitailist', [
+      'imatomo.service.shitaies'
+    ])
     .controller('ShitailistController', ShitailistController);
 
-  ShitailistController.$inject = ['$firebaseArray'];
+  ShitailistController.$inject = ['$location', 'ShitaiesService', 'ProfilesService'];
 
   /**
    * ShitailistController
@@ -18,9 +20,11 @@
    * @class ShitailistController
    * @constructor
    */
-  function ShitailistController($firebaseArray) {
+  function ShitailistController($location, ShitaiesService, ProfilesService) {
     console.log('ShitailistController Constructor');
-    this.$firebaseArray = $firebaseArray;
+    this.ShitaiesService = ShitaiesService;
+    this.ProfilesService = ProfilesService;
+    this.$location = $location;
   }
 
   /**
@@ -32,10 +36,10 @@
   ShitailistController.prototype.activate = function() {
     console.log('ShitailistController activate Method');
     vm = this;
-    var ref = new Firebase('https://resplendent-inferno-2076.firebaseio.com/shitailist');
+
     // したい一覧を画面に設定
-    var shitailist = vm.$firebaseArray(ref);
-    vm.items = shitailist;
+    var shitaies = vm.ShitaiesService.findShitaies();
+    vm.items = shitaies;
   };
 
   /**
@@ -46,6 +50,17 @@
    */
   ShitailistController.prototype.approval = function() {
     console.log('ShitailistController approval Method');
+  };
+
+  /**
+   * The controller activate makes it convenient to re-use the logic
+   * for a refresh for the controller/View, keeps the logic together.
+   *
+   * @method activate
+   */
+  ShitailistController.prototype.moveDetail = function(id) {
+    console.log('ShitailistController moveDetail Method');
+    vm.$location.path('/shitaidetail/' + id);
   };
 
   /**

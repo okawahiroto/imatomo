@@ -20,7 +20,7 @@
 # 開発者向けの情報
 
 Firebase で管理する公言情報JSONは以下の通り
-* shitaiid    ：したいID
+* $id         ：したいID(Firebaseが採番してくれるID)
 * userid      ：登録した人のユーザID
 * username    ：登録した人の名前
 * title       ：○○したい！
