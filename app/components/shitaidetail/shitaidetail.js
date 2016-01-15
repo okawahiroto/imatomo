@@ -34,13 +34,13 @@
     var ref = new Firebase('https://resplendent-inferno-2076.firebaseio.com/shitailist');
     var shitailist = vm.$firebaseArray(ref);
 
-    for (var sItem in shitailist) {
+    /*for (var sItem in shitailist) {
       var sid = sItem.shitaiid;
-      if (sid = $shitaiid) {
+      if (sid == $shitaiid) {
         setShitaiItem(sItem);
-        exit;
+        //exit;
       }
-    }
+    }*/
   };
 
   /**
