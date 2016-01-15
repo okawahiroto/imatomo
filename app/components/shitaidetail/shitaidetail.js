@@ -31,6 +31,16 @@
   ShitaidetailController.prototype.activate = function() {
     console.log('ShitaidetailController activate Method');
     vm = this;
+    var ref = new Firebase('https://resplendent-inferno-2076.firebaseio.com/shitailist');
+    var shitailist = vm.$firebaseArray(ref);
+
+    for (var sItem in shitailist) {
+      var sid = sItem.shitaiid;
+      if (sid = $shitaiid) {
+        setShitaiItem(sItem);
+        exit;
+      }
+    }
   };
 
   /**
@@ -40,4 +50,20 @@
    * @type {Object}
    */
   var vm;
+
+  /**
+   * @method setShitaiItem
+   * @private
+   */
+  var setShitaiItem = function (shitaiItem) {
+    vm.shitaiid    = shitaiItem.shitaiid;
+    vm.userid      = shitaiItem.userid;
+    vm.username    = shitaiItem.username;
+    vm.title       = shitaiItem.title;
+    vm.time        = shitaiItem.time;
+    vm.place       = shitaiItem.place;
+    vm.comment     = shitaiItem.comment;
+    vm.createtimesstamp = shitaiItem.createtimesstamp;
+  };
+
 })();

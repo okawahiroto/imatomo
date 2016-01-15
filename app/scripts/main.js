@@ -26,7 +26,7 @@
     {path: '/shitai',    component: 'shitai'},
     {path: '/group',    component: 'group'},
     {path: '/profile',    component: 'profile'},
-    {path: '/shitaidetail',    component: 'shitaidetail'},
+    {path: '/shitaidetail/:shitaiid',    component: 'shitaidetail'},
     {path: '/groupdetail',    component: 'groupdetail'}
   ];
 
