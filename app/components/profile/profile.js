@@ -7,10 +7,12 @@
   'use strict';
 
   angular
-    .module('imatomo.components.profile', [])
+    .module('imatomo.components.profile', [
+      'imatomo.service.profiles'
+    ])
     .controller('ProfileController', ProfileController);
 
-  ProfileController.$inject = ['$location'];
+  ProfileController.$inject = ['$location', 'ProfilesService'];
 
   /**
    * ProfileController
@@ -18,9 +20,10 @@
    * @class ProfileController
    * @constructor
    */
-  function ProfileController($location) {
+  function ProfileController($location, ProfilesService) {
     console.log('ProfileController Constructor');
     this.$location = $location;
+    this.ProfilesService = ProfilesService;
   }
 
   /**
@@ -33,18 +36,16 @@
     console.log('ProfileController activate Method');
     vm = this;
 
-    // ローカルストレージからユーザ情報を取得
-    var localStorage = window.localStorage;
-    var user = localStorage.getItem('user');
+    // ユーザ情報を取得
+    var profile = vm.ProfilesService.findProfile();
 
     // なければ新規フラグを立てて終了
-    if (!user) {
-      vm.status = 'new';
+    if (!profile) {
+      vm.mode = 'new';
       return;
     }
-    var userObj = JSON.parse(user);
-    vm.userid = userObj.userid;
-    vm.username = userObj.username;
+
+    vm.username = profile.username;
   };
 
   /**
@@ -53,17 +54,27 @@
   ProfileController.prototype.register = function() {
     console.log('ProfileController register Method');
     var user = {
-      userid: vm.userid,
       username: vm.username
     };
 
-    // ローカルストレージにユーザ情報を取得
-    var localStorage = window.localStorage;
-    localStorage.setItem('user', JSON.stringify(user));
+    // サービス実行
+    if (vm.mode === 'new') {
+      vm.ProfilesService.addProfile(user);
+    } else {
+      vm.ProfilesService.modProfile(user);
+    }
 
-    vm.status = undefined;
     // shitailistへ
     vm.$location.path('shitailist');
+  };
+
+  /**
+   * @method closeAlert
+   */
+  ProfileController.prototype.closeAlert = function () {
+    console.log('close');
+    vm.status = '';
+    vm.message = '';
   };
 
   /**
