@@ -63,7 +63,7 @@
       username : userObj.username,
       title: vm.title,
       time: vm.time,
-      comment : vm.comment,
+      comment : (vm.comment === undefined ? '' : vm.comment),
       place: (vm.place === undefined ? '' : vm.place),
       createtimestamp : Firebase.ServerValue.TIMESTAMP
     };
