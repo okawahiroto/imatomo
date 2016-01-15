@@ -28,4 +28,4 @@ Firebase で管理する公言情報JSONは以下の通り
 * place       ：どこで
 * comment     ：コメント
 * craetetimestamp ：登録日時
-* approvals   ：賛同した人一覧
+* approvals   ：賛同した人一覧（予定）
