@@ -37,8 +37,10 @@
       /*
        * １件検索
        */
-      findShitai: function(id) {
-        return shitaiesArray.$getRecord(id);
+      findShitai: function(id, aftfnc) {
+        shitaiesArray.$loaded().then(function(x) {
+          aftfnc(shitaiesArray.$getRecord(id));
+        });
       },
 
       /*

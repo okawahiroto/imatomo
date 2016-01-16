@@ -37,8 +37,7 @@
   ShitaidetailController.prototype.activate = function() {
     console.log('ShitaidetailController activate Method');
     vm = this;
-
-    setShitaiItem(vm.ShitaiesService.findShitai(vm.id));
+    vm.ShitaiesService.findShitai(vm.id, setShitaiItem);
   };
 
   /**
@@ -54,7 +53,6 @@
    * @private
    */
   var setShitaiItem = function (shitaiItem) {
-    console.log(shitaiItem);
     vm.id          = shitaiItem.$id;
     vm.userid      = shitaiItem.userid;
     vm.username    = shitaiItem.username;
