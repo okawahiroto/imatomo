@@ -57,15 +57,18 @@
       username: vm.username
     };
 
+    // 登録後に実行する処理 $promiss.then で画面遷移させる必要あり
+    var aftfnc = function() {
+      vm.$location.path('shitailist');
+    };
+
     // サービス実行
     if (vm.mode === 'new') {
-      vm.ProfilesService.addProfile(user);
+      vm.ProfilesService.addProfile(user, aftfnc);
     } else {
-      vm.ProfilesService.modProfile(user);
+      vm.ProfilesService.modProfile(user, aftfnc);
     }
 
-    // shitailistへ
-    vm.$location.path('shitailist');
   };
 
   /**

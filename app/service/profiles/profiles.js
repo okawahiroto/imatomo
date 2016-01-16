@@ -44,7 +44,7 @@
       /*
        * 登録
        */
-      addProfile: function(profile) {
+      addProfile: function(profile, aftfunc) {
 
         // 登録
         profileArray.$add(profile).then(function(ref) {
@@ -53,13 +53,15 @@
           // ローカルストレージに登録
           profile.userid = id;
           window.localStorage.setItem('profile', JSON.stringify(profile));
+
+          aftfunc();
         });
       },
 
       /*
        * 更新
        */
-      modProfile: function(profile) {
+      modProfile: function(profile, aftfunc) {
 
         // ユーザID
         var userid = this.findProfile().userid;
@@ -72,6 +74,8 @@
           // ローカルストレージを更新
           profile.userid = userid;
           window.localStorage.setItem('profile', JSON.stringify(profile));
+
+          aftfunc();
         });
       }
     };
