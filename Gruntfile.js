@@ -103,10 +103,10 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
-
   grunt.registerTask('deploy', [
     'clean:dist',
     'injector',
+    'injector:base4ghpages',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',

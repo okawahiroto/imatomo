@@ -61,6 +61,36 @@
              '!test/karma.conf.js']
           ]
       }
+    },
+    base4ghpages: {
+      options: {
+        template: '<%= paths.app %>/index.html',
+        starttag: '<!-- injector:base-start -->',
+        endtag: '<!-- injector:base-end -->',
+        transform: function(filePath) {
+          return '<base href="http://okawahiroto.github.io/imatomo/">';
+        }
+      },
+      files: {
+        '<%= paths.app %>/index.html': [
+            ['<%= paths.app %>/index.html']
+          ]
+      }
+    },
+    base4local: {
+      options: {
+        template: '<%= paths.app %>/index.html',
+        starttag: '<!-- injector:base-start -->',
+        endtag: '<!-- injector:base-end -->',
+        transform: function(filePath) {
+          return '<base href="/">';
+        }
+      },
+      files: {
+        '<%= paths.app %>/index.html': [
+            ['<%= paths.app %>/index.html']
+          ]
+      }
     }
   };
 })();
