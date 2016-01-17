@@ -58,7 +58,7 @@
     };
 
     // 登録後に実行する処理 $promiss.then で画面遷移させる必要あり
-    var aftfnc = function() {
+    var aftfnc = function(p) {
       vm.$location.path('shitailist');
     };
 

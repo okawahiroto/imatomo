@@ -26,6 +26,7 @@
     this.$location = $location;
     this.ProfilesService = ProfilesService;
     this.GroupsService = GroupsService;
+    this.profile = ProfilesService.getStorageProfile();
   }
 
   /**
@@ -46,19 +47,18 @@
    * 追加する
    */
   GroupController.prototype.register = function() {
-    var profile = vm.ProfilesService.getStorageProfile();
 
     // なければ終了
-    if (!profile) {
+    if (!vm.profile) {
       vm.status = 'dengire';
       vm.message = 'ユーザ登録を行ってください。';
       return;
     }
 
     var group = {
-      createuserid : profile.userid,
+      createuserid : vm.profile.userid,
       groupname: vm.groupname,
-      members : [{userid : profile.userid, username : profile.username}]
+      members : [{userid : vm.profile.userid, username : vm.profile.username}]
     };
 
     // Firebaseに追加

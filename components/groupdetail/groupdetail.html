@@ -11,7 +11,7 @@
       <input class="btn btn-primary" type="button" value="参加する" ng-click="groupdetail.apply()"
         ng-show="groupdetail.isAbleApply()">
       <input class="btn btn-danger" type="button" value="解散する" ng-click="groupdetail.dissolution()"
-        ng-show="groupdetail.group.createuserid == groupdetail.profile.userid">
+        ng-show="groupdetail.isAbleDissolution()">
       <input class="btn btn-danger" type="button" value="脱退する" ng-click="groupdetail.withdrawal()"
       ng-show="groupdetail.isAbleWithdrawal()">
     </div>

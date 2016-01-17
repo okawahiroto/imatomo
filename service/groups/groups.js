@@ -79,7 +79,7 @@
           var g = groupsArray.$getRecord(id);
           var profile =  ProfilesService.getStorageProfile();
           var newMembers = g.members.filter(function(m) {
-            return m.userid != profile.userid;
+            return m.userid !== profile.userid;
           });
           if (newMembers.length === 0)  {
             groupsService.removeGroup(id, aftfnc);
