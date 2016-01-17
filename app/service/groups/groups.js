@@ -57,17 +57,55 @@
       },
 
       /*
-       * 参加する
+       * メンバー追加
        */
-      apply: function(id) {
+      addMember: function(id, memberid) {
         groupsArray.$loaded().then(function(x) {
           var g = groupsArray.$getRecord(id);
           if (!g.members) {
             g.members = [];
           }
           var profile =  ProfilesService.getStorageProfile();
-          g.members.push({userid : profile.userid, username : profile.userid});
+          g.members.push({userid : profile.userid, username : profile.username});
           groupsArray.$save(g);
+        });
+      },
+
+      /*
+       * メンバー削除
+       */
+      removeMember: function(id, userid, aftfnc) {
+        groupsArray.$loaded().then(function(x) {
+          var g = groupsArray.$getRecord(id);
+          var profile =  ProfilesService.getStorageProfile();
+          var newMembers = g.members.filter(function(m) {
+            return m.userid != profile.userid;
+          });
+          if (newMembers.length === 0)  {
+            groupsService.removeGroup(id, aftfnc);
+            return;
+          }
+          g.members = newMembers;
+          groupsArray.$save(g);
+          if (aftfnc) {
+            aftfnc();
+          }
+        });
+      },
+
+      /*
+       * 削除する
+       */
+      removeGroup: function(id, aftfnc) {
+        groupsArray.$loaded().then(function(x) {
+          var g = groupsArray.$getRecord(id);
+          if (g) {
+            groupsArray.$remove(g).then(function(x) {
+              if (aftfnc) {
+                aftfnc();
+              }
+            });
+          }
         });
       }
     };

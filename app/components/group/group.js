@@ -57,7 +57,8 @@
 
     var group = {
       createuserid : profile.userid,
-      groupname: vm.groupname
+      groupname: vm.groupname,
+      members : [{userid : profile.userid, username : profile.username}]
     };
 
     // Firebaseに追加
