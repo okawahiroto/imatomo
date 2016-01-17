@@ -71,30 +71,24 @@
    * 賛同ボタンを表示できるか検証する
    */
   ShitailistController.prototype.isApproval = function(shitai) {
-    console.log('ShitailistController isApproval Method');
-
     // ユーザ登録がまだなら非表示
     if (!vm.profile) {
-      console.log('vm.profile not exists');
       return false;
     }
 
     // 自分が公言したものなら非表示
     if (shitai.userid === vm.profile.userid) {
-      console.log('it is my shitai');
       return false;
     }
 
     // 賛同がまだ０なら表示
     if (!shitai.approvals) {
-      console.log('approvals is empty');
       return true;
     }
 
     var isshow = true;
     shitai.approvals.forEach(function(s) {
       if (s.userid === vm.profile.userid) {
-        console.log('already approval');
         isshow = false;
       }
     });

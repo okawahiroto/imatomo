@@ -65,10 +65,10 @@
     };
 
     // Firebaseに追加
-    vm.ShitaiesService.addShitai(shitai);
-
-    // shitailistへ遷移
-    vm.$location.path('shitailist');
+    vm.ShitaiesService.addShitai(shitai, function(){
+      // shitailistへ遷移
+      vm.$location.path('shitailist');
+    });
   };
 
   /**

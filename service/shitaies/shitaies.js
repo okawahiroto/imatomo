@@ -46,8 +46,8 @@
       /*
        * 登録
        */
-      addShitai: function(shitai) {
-        shitaiesArray.$add(shitai);
+      addShitai: function(shitai, aftfnc) {
+        shitaiesArray.$add(shitai).then(aftfnc);
       },
 
       /*
