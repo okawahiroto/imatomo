@@ -50,7 +50,9 @@
       profiles.$loaded().then(function (x) {
         for (var i = 0; i < shitaies.length; i++) {
           var profile = profiles.$getRecord(shitaies[i].userid);
-          shitaies[i].name = profile.username;
+          if (profile) {
+            shitaies[i].username = profile.username;
+          }
         }
       });
     });

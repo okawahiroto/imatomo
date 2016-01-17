@@ -65,7 +65,7 @@
     };
 
     // Firebaseに追加
-    vm.ShitaiesService.addShitai(shitai, function(){
+    vm.ShitaiesService.addShitai(shitai, function() {
       // shitailistへ遷移
       vm.$location.path('shitailist');
     });

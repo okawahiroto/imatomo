@@ -37,9 +37,11 @@
       /*
        * １件検索
        */
-      findShitai: function(id, aftfnc) {
+      getShitai: function(id, aftfnc) {
         shitaiesArray.$loaded().then(function(x) {
-          aftfnc(shitaiesArray.$getRecord(id));
+          if (aftfnc) {
+            aftfnc(shitaiesArray.$getRecord(id));
+          }
         });
       },
 
@@ -47,7 +49,11 @@
        * 登録
        */
       addShitai: function(shitai, aftfnc) {
-        shitaiesArray.$add(shitai).then(aftfnc);
+        shitaiesArray.$add(shitai).then(function(x) {
+          if (aftfnc) {
+            aftfnc();
+          }
+        });
       },
 
       /*
@@ -60,7 +66,8 @@
           if (!p.approvals) {
             p.approvals = [];
           }
-          p.approvals.push(ProfilesService.getStorageProfile());
+          var profile =  ProfilesService.getStorageProfile();
+          p.approvals.push({userid : profile.userid});
           shitaiesArray.$save(p);
         });
       }

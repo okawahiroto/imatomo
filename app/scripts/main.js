@@ -27,7 +27,7 @@
     {path: '/group',    component: 'group'},
     {path: '/profile',    component: 'profile'},
     {path: '/shitaidetail/:id',    component: 'shitaidetail'},
-    {path: '/groupdetail',    component: 'groupdetail'}
+    {path: '/groupdetail/:id',    component: 'groupdetail'}
   ];
 
   AppController.$inject = [];

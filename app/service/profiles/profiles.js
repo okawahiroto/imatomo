@@ -60,8 +60,9 @@
           // ローカルストレージに登録
           profile.userid = id;
           window.localStorage.setItem('profile', JSON.stringify(profile));
-
-          aftfunc();
+          if (aftfunc) {
+            aftfunc();
+          }
         });
       },
 
@@ -82,7 +83,9 @@
           profile.userid = userid;
           window.localStorage.setItem('profile', JSON.stringify(profile));
 
-          aftfunc();
+          if (aftfunc) {
+            aftfunc();
+          }
         });
       }
     };

@@ -1,1 +1,19 @@
-<div>groupdetail.html</div>
+<dl class="dl-horizontal">
+  <dt>グループ名</dt>
+  <dd>{{groupdetail.groupname}}</dd>
+  <dt>作成者</dt>
+  <dd>{{groupdetail.createusername}}</dd>
+</dl>
+<table class="table table-striped">
+    <tr ng-repeat="data in groupdetail.members">
+      <td>{{data.username}}</td>
+    </tr>
+</table>
+
+<form class="form-horizontal" name="groupapplyer" ng-submit="groupdetail.apply()">
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input class="btn btn-default" type="submit" value="参加する">
+    </div>
+  </div>
+</form>
