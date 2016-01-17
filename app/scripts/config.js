@@ -13,7 +13,7 @@
       # HTML5 Mode
       http://www.example.com/aaa/
     */
-    $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(false);
   }
 
   AppConfig.$inject = ['$locationProvider'];

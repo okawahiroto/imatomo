@@ -68,9 +68,9 @@
         starttag: '<!-- injector:base-start -->',
         endtag: '<!-- injector:base-end -->',
         transform: function(filePath) {
-          return '<base href="http://okawahiroto.github.io/imatomo/">';
+          //return '<base href="http://okawahiroto.github.io/imatomo/">';
           //return '<base />';
-          //return '<base href="/imatomo/">';
+          return '<base href="/imatomo/">';
         }
       },
       files: {
