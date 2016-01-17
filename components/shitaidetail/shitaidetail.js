@@ -37,7 +37,7 @@
   ShitaidetailController.prototype.activate = function() {
     console.log('ShitaidetailController activate Method');
     vm = this;
-    vm.ShitaiesService.findShitai(vm.id, setShitaiItem);
+    vm.ShitaiesService.getShitai(vm.id, setShitaiItem);
   };
 
   /**
@@ -67,7 +67,9 @@
     // 名前解決
     profiles.$loaded().then(function (x) {
       var profile = profiles.$getRecord(shitaiItem.userid);
-      vm.username = profile.username;
+      if (profile) {
+        vm.username = profile.username;
+      }
     });
   };
 

@@ -1,1 +1,25 @@
-<div>groupdetail.html</div>
+<dl class="dl-horizontal">
+  <dt>グループ名</dt>
+  <dd>{{groupdetail.group.groupname}}</dd>
+  <dt>作成者</dt>
+  <dd>{{groupdetail.createusername}}</dd>
+</dl>
+
+<form class="form-horizontal" name="groupapplyer">
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input class="btn btn-primary" type="button" value="参加する" ng-click="groupdetail.apply()"
+        ng-show="groupdetail.isAbleApply()">
+      <input class="btn btn-danger" type="button" value="解散する" ng-click="groupdetail.dissolution()"
+        ng-show="groupdetail.group.createuserid == groupdetail.profile.userid">
+      <input class="btn btn-danger" type="button" value="脱退する" ng-click="groupdetail.withdrawal()"
+      ng-show="groupdetail.isAbleWithdrawal()">
+    </div>
+  </div>
+</form>
+
+<table class="table table-striped">
+    <tr ng-repeat="data in groupdetail.group.members">
+      <td>{{data.username}}</td>
+    </tr>
+</table>
