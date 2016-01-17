@@ -38,9 +38,22 @@
     console.log('ShitailistController activate Method');
     vm = this;
 
-    // したい一覧を画面に設定
+    // したい一覧
     var shitaies = vm.ShitaiesService.findShitaies();
     vm.items = shitaies;
+
+    // プロファイル一覧
+    var profiles = vm.ProfilesService.getProfiles();
+
+    // 名前解決
+    shitaies.$loaded().then(function (x) {
+      profiles.$loaded().then(function (x) {
+        for (var i = 0; i < shitaies.length; i++) {
+          var profile = profiles.$getRecord(shitaies[i].userid);
+          shitaies[i].name = profile.username;
+        }
+      });
+    });
 
     // プロファイル保持
     vm.profile = vm.ProfilesService.getStorageProfile();

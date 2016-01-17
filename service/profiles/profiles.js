@@ -45,7 +45,7 @@
        * 検索
        */
       getProfiles: function() {
-
+        return profileArray;
       },
 
       /*

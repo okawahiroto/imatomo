@@ -56,7 +56,7 @@
 
     var shitai = {
       userid : profile.userid,
-      username : profile.username,
+      //username : profile.username,
       title: vm.title,
       time: vm.time,
       comment : (vm.comment === undefined ? '' : vm.comment),
