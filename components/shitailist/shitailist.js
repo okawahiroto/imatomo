@@ -8,7 +8,8 @@
 
   angular
     .module('imatomo.components.shitailist', [
-      'imatomo.service.shitaies'
+      'imatomo.service.shitaies',
+      'imatomo.service.profiles'
     ])
     .controller('ShitailistController', ShitailistController);
 
@@ -42,7 +43,7 @@
     vm.items = shitaies;
 
     // プロファイル保持
-    vm.profile = vm.ProfilesService.findProfile();
+    vm.profile = vm.ProfilesService.getStorageProfile();
   };
 
   /**

@@ -60,7 +60,7 @@
           if (!p.approvals) {
             p.approvals = [];
           }
-          p.approvals.push(ProfilesService.findProfile());
+          p.approvals.push(ProfilesService.getStorageProfile());
           shitaiesArray.$save(p);
         });
       }

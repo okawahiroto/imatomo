@@ -26,9 +26,9 @@
     var profilesService = {
 
       /*
-       * 検索
+       * LocalStorage検索
        */
-      findProfile: function() {
+      getStorageProfile: function() {
 
         // ローカルストレージからユーザ情報を取得
         var localStorage = window.localStorage;
@@ -39,6 +39,13 @@
           return undefined;
         }
         return JSON.parse(user);
+      },
+
+      /*
+       * 検索
+       */
+      getProfiles: function() {
+
       },
 
       /*
@@ -64,7 +71,7 @@
       modProfile: function(profile, aftfunc) {
 
         // ユーザID
-        var userid = this.findProfile().userid;
+        var userid = this.getStorageProfile().userid;
 
         // 更新
         profileArray.$loaded().then(function(x) {

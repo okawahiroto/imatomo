@@ -45,7 +45,7 @@
   ShitaiController.prototype.register = function() {
     console.log('ShitaiController register Method');
 
-    var profile = vm.ProfilesService.findProfile();
+    var profile = vm.ProfilesService.getStorageProfile();
 
     // なければ終了
     if (!profile) {
