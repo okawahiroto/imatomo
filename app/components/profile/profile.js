@@ -37,7 +37,7 @@
     vm = this;
 
     // ユーザ情報を取得
-    var profile = vm.ProfilesService.findProfile();
+    var profile = vm.ProfilesService.getStorageProfile();
 
     // なければ新規フラグを立てて終了
     if (!profile) {

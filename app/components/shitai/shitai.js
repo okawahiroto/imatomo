@@ -45,7 +45,7 @@
   ShitaiController.prototype.register = function() {
     console.log('ShitaiController register Method');
 
-    var profile = vm.ProfilesService.findProfile();
+    var profile = vm.ProfilesService.getStorageProfile();
 
     // なければ終了
     if (!profile) {
@@ -56,7 +56,7 @@
 
     var shitai = {
       userid : profile.userid,
-      username : profile.username,
+      //username : profile.username,
       title: vm.title,
       time: vm.time,
       comment : (vm.comment === undefined ? '' : vm.comment),
@@ -65,10 +65,10 @@
     };
 
     // Firebaseに追加
-    vm.ShitaiesService.addShitai(shitai);
-
-    // shitailistへ遷移
-    vm.$location.path('shitailist');
+    vm.ShitaiesService.addShitai(shitai, function(){
+      // shitailistへ遷移
+      vm.$location.path('shitailist');
+    });
   };
 
   /**

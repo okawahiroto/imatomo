@@ -55,12 +55,20 @@
   var setShitaiItem = function (shitaiItem) {
     vm.id          = shitaiItem.$id;
     vm.userid      = shitaiItem.userid;
-    vm.username    = shitaiItem.username;
     vm.title       = shitaiItem.title;
     vm.time        = shitaiItem.time;
     vm.place       = shitaiItem.place;
     vm.comment     = shitaiItem.comment;
     vm.createtimesstamp = shitaiItem.createtimesstamp;
+
+    // プロファイル一覧
+    var profiles = vm.ProfilesService.getProfiles();
+
+    // 名前解決
+    profiles.$loaded().then(function (x) {
+      var profile = profiles.$getRecord(shitaiItem.userid);
+      vm.username = profile.username;
+    });
   };
 
 })();
