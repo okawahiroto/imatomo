@@ -61,7 +61,7 @@
           profile.userid = id;
           window.localStorage.setItem('profile', JSON.stringify(profile));
           if (aftfunc) {
-            aftfunc();
+            aftfunc(ref);
           }
         });
       },
@@ -84,7 +84,7 @@
           window.localStorage.setItem('profile', JSON.stringify(profile));
 
           if (aftfunc) {
-            aftfunc();
+            aftfunc(profile);
           }
         });
       }

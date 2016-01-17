@@ -39,5 +39,6 @@
    * @main imatomo
    * @constructor
    */
-  function AppController () {}
+  function AppController () {
+  }
 })();

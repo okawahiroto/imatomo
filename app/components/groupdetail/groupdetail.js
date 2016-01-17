@@ -27,6 +27,7 @@
     this.$location = $location;
     this.ProfilesService = ProfilesService;
     this.GroupsService = GroupsService;
+    this.profile = ProfilesService.getStorageProfile();
   }
 
   /**
@@ -41,8 +42,6 @@
 
     // プロファイル一覧
     var profiles = vm.ProfilesService.getProfiles();
-
-    vm.profile = vm.ProfilesService.getStorageProfile();
 
     // グループ取得
     vm.GroupsService.getGroup(vm.id, function(group) {
@@ -100,18 +99,17 @@
     });
   };
 
-
   /**
    * 参加するが可能か
    */
   GroupdetailController.prototype.isAbleApply = function() {
 
-    if (!vm.group) {
+    if (!vm.group || !vm.profile) {
       return false;
     }
 
     // 自分のグループなら非表示
-    if (vm.group.createuserid == vm.profile.userid) {
+    if (vm.group.createuserid === vm.profile.userid) {
       return false;
     }
 
@@ -128,9 +126,22 @@
   /**
    * 脱退するが可能か
    */
+  GroupdetailController.prototype.isAbleDissolution = function() {
+
+    if (!vm.group || !vm.profile) {
+      return false;
+    }
+
+    // 既に参加済なら表示
+    return (vm.group.createuserid === vm.profile.userid);
+  };
+
+  /**
+   * 脱退するが可能か
+   */
   GroupdetailController.prototype.isAbleWithdrawal = function() {
 
-    if (!vm.group) {
+    if (!vm.group || !vm.profile) {
       return false;
     }
 
