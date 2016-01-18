@@ -70,6 +70,25 @@
           p.approvals.push({userid : profile.userid});
           shitaiesArray.$save(p);
         });
+      },
+
+      /*
+       * キャンセルする
+       */
+      cancel: function(id, aftfnc) {
+        // 更新
+        shitaiesArray.$loaded().then(function(x) {
+          var s = shitaiesArray.$getRecord(id);
+          var profile =  ProfilesService.getStorageProfile();
+          var newApprovals = s.approvals.filter(function(a) {
+            return a.userid !== profile.userid;
+          });
+          s.approvals = newApprovals;
+          shitaiesArray.$save(s);
+          if (aftfnc) {
+            aftfnc();
+          }
+        });
       }
     };
 

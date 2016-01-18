@@ -70,6 +70,14 @@
   };
 
   /**
+   * キャンセルする
+   */
+  ShitailistController.prototype.cancel = function(id) {
+    console.log('ShitailistController approval Method');
+    vm.ShitaiesService.cancel(id);
+  };
+
+  /**
    * 賛同ボタンを表示できるか検証する
    */
   ShitailistController.prototype.isApproval = function(shitai) {
@@ -92,6 +100,34 @@
     shitai.approvals.forEach(function(s) {
       if (s.userid === vm.profile.userid) {
         isshow = false;
+      }
+    });
+    return isshow;
+  };
+
+  /**
+   * キャンセルボタンを表示できるか検証する
+   */
+  ShitailistController.prototype.isCancel = function(shitai) {
+    // ユーザ登録がまだなら非表示
+    if (!vm.profile) {
+      return false;
+    }
+
+    // 自分が公言したものなら非表示
+    if (shitai.userid === vm.profile.userid) {
+      return false;
+    }
+
+    // 賛同がまだ０なら表示
+    if (!shitai.approvals) {
+      return false;
+    }
+
+    var isshow = false;
+    shitai.approvals.forEach(function(s) {
+      if (s.userid === vm.profile.userid) {
+        isshow = true;
       }
     });
     return isshow;
