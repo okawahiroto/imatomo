@@ -41,4 +41,12 @@
    */
   function AppController () {
   }
+
+  /**
+   * ヘッダのナビゲータクリック時
+   */
+  AppController.prototype.clickNavbar = function() {
+    $('.navbar-collapse').collapse('hide');
+  };
+
 })();
