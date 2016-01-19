@@ -104,6 +104,7 @@
     // 賛同の検知
     shitaiesArray.$watch(function(event) {
 
+      console.log('event.event=' + event.event);
       if (event.event !== 'child_changed') {
         return;
       }
