@@ -61,11 +61,11 @@
        */
       addMember: function(id, memberid) {
         groupsArray.$loaded().then(function(x) {
+          var profile =  ProfilesService.getStorageProfile();
           var g = groupsArray.$getRecord(id);
           if (!g.members) {
             g.members = [];
           }
-          var profile =  ProfilesService.getStorageProfile();
           g.members.push({userid : profile.userid, username : profile.username});
           groupsArray.$save(g);
         });
@@ -76,8 +76,8 @@
        */
       removeMember: function(id, userid, aftfnc) {
         groupsArray.$loaded().then(function(x) {
-          var g = groupsArray.$getRecord(id);
           var profile =  ProfilesService.getStorageProfile();
+          var g = groupsArray.$getRecord(id);
           var newMembers = g.members.filter(function(m) {
             return m.userid !== profile.userid;
           });

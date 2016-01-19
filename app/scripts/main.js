@@ -11,6 +11,8 @@
       'ngNewRouter',
       'imatomo.config',
       'firebase',
+      'toaster',
+      'ngAnimate',
       'imatomo.components.shitailist',
       'imatomo.components.shitai',
       'imatomo.components.group',

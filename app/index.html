@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <!-- injector:base-start -->
-    <base href="/imatomo/">
+    <base href="/">
     <!-- injector:base-end -->
-    
+
     <title>imatomo</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
@@ -14,6 +14,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -29,6 +30,8 @@
 
     <div class="container">
 
+      <toaster-container></toaster-container>
+      
       <div ng-viewport></div>
 
       <div ng-include="'components/footer/footer.html'"></div>
@@ -43,6 +46,8 @@
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/firebase/firebase.js"></script>
     <script src="bower_components/angularfire/dist/angularfire.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angularjs-toaster/toaster.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
