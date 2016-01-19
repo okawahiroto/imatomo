@@ -9,7 +9,7 @@
   angular
     .module('imatomo.components.shitaidetail', [
       'imatomo.service.shitaies',
-      'imatomo.service.profiles'
+      'imatomo.service.profiles',
     ])
     .controller('ShitaidetailController', ShitaidetailController);
 
@@ -71,6 +71,21 @@
         vm.username = profile.username;
       }
     });
+
+    // 賛同者取得
+    var approvalsMembers = ['だれもいません'];
+    profiles.$loaded().then(function (x) {
+      if (shitaiItem.approvals) {
+        approvalsMembers.shift();
+        for (var i = 0; i < shitaiItem.approvals.length; i++) {
+          var profile = profiles.$getRecord(shitaiItem.approvals[i].userid);
+          if (profile) {
+            approvalsMembers.push(profile.username);
+          }
+        }
+      }
+    });
+    vm.approvals = approvalsMembers;
   };
 
 })();
