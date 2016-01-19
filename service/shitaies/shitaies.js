@@ -114,16 +114,21 @@
       // 賛同する更新じゃなければ無視
       console.log('shitai.lastApprovalUserid = ' + shitai.lastApprovalUserid);
       if (!shitai.lastApprovalUserid) {
+        console.log('賛同する更新じゃなければ無視');
         return;
       }
 
       // 自分以外が登録したものなら無視する
       if (shitai.userid !== profile.userid) {
+        console.log(shitai.userid + '!==' + profile.userid);
+        console.log('自分以外が登録したものなら無視する');
         return;
       }
 
       // 自分の $add 'child_changed' だったら何もしない
       if (shitaiesService.selfApproval) {
+        console.log('shitaiesService.selfApproval=' + shitaiesService.selfApproval);
+        console.log('自分の $add child_changed だったら何もしない');
         shitaiesService.selfApproval = false;
         return;
       }
