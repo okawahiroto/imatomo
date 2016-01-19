@@ -15,6 +15,7 @@
           'components/{,*/}*.js',
           'service/{,*/}*.js',
           'directives/{,*/}*.html',
+          'audio/{,*/}*.mp3',
           '{,*/}*.html',
           'styles/fonts/{,*/}*.*'
         ]
