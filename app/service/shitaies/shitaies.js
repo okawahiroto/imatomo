@@ -12,7 +12,7 @@
     ])
     .factory('ShitaiesService', ShitaiesService);
 
-  ShitaiesService.$inject = ['$firebaseArray', 'ProfilesService'];
+  ShitaiesService.$inject = ['$firebaseArray', 'ProfilesService', 'toaster'];
 
   var ref = new Firebase('https://resplendent-inferno-2076.firebaseio.com/shitaies');
 
@@ -22,7 +22,7 @@
    * @class ShitaiesService
    * @constructor
    */
-  function ShitaiesService($firebaseArray, ProfilesService) {
+  function ShitaiesService($firebaseArray, ProfilesService, toaster) {
 
     var shitaiesArray = $firebaseArray(ref);
 
@@ -109,7 +109,8 @@
 
       var profile =  ProfilesService.getStorageProfile();
       var shitai = shitaiesArray.$getRecord(event.key);
-      // 自分の公言ならば音を鳴らす
+
+      // 自分以外が登録したものなら無視する
       if (shitai.userid !== profile.userid) {
         return;
       }
@@ -119,6 +120,11 @@
         shitaiesService.selfApproval = false;
         return;
       }
+
+      // 参加者を取得
+      var newMemberId = shitai.approvals[shitai.approvals.length - 1].userid;
+      var newMember = ProfilesService.getProfiles().$getRecord(newMemberId);
+      toaster.pop('success', '仲間があらわれた！', newMember.username + ' さんがあなたに賛同しました。');
 
       // 音ならす
       var callbell = new Audio('audio/linelike.mp3');
