@@ -18,5 +18,15 @@
           賛同する
         </button>
       </td>
+      <td>
+        <button type="button" class="btn btn-danger" ng-click="shitailist.cancel(data.$id)" ng-show="shitailist.isCancel(data)">
+          キャンセル
+        </button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-primary" ng-click="shitailist.items.$remove(data)">
+          削除
+        </button>
+      </td>
     </tr>
 </table>
