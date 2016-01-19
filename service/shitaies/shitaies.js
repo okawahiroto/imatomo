@@ -70,7 +70,7 @@
             p.approvals = [];
           }
           p.approvals.push({userid : profile.userid});
-          p.lastApprovalUserid.push({userid : profile.userid});
+          p.lastApprovalUserid = profile.userid;
           shitaiesArray.$save(p);
         });
       },
@@ -112,6 +112,7 @@
       var shitai = shitaiesArray.$getRecord(event.key);
 
       // 賛同する更新じゃなければ無視
+      console.log('shitai.lastApprovalUserid = ' + shitai.lastApprovalUserid);
       if (!shitai.lastApprovalUserid) {
         return;
       }
