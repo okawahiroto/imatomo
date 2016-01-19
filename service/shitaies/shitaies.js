@@ -70,6 +70,7 @@
             p.approvals = [];
           }
           p.approvals.push({userid : profile.userid});
+          p.lastApprovalUserid.push({userid : profile.userid});
           shitaiesArray.$save(p);
         });
       },
@@ -110,6 +111,11 @@
       var profile =  ProfilesService.getStorageProfile();
       var shitai = shitaiesArray.$getRecord(event.key);
 
+      // 賛同する更新じゃなければ無視
+      if (!shitai.lastApprovalUserid) {
+        return;
+      }
+
       // 自分以外が登録したものなら無視する
       if (shitai.userid !== profile.userid) {
         return;
@@ -122,12 +128,16 @@
       }
 
       // 参加者を取得
-      var newMemberId = shitai.approvals[shitai.approvals.length - 1].userid;
+      var newMemberId = shitai.lastApprovalUserid;
       var newMember = ProfilesService.getProfiles().$getRecord(newMemberId);
       toaster.pop('success', '仲間があらわれた！', newMember.username + ' さんがあなたに賛同しました。');
 
+      // 最終賛同者をすぐさまクリア
+      shitai.lastApprovalUserid = '';
+      shitaiesArray.$sve(shitai);
+
       // 音ならす
-      var callbell = new Audio('audio/linelike.mp3');
+      var callbell = new Audio($('base').prop('href') + 'audio/linelike.mp3');
       callbell.play();
     });
 
