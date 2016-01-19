@@ -135,7 +135,7 @@
 
       // 最終賛同者をすぐさまクリア
       shitai.lastApprovalUserid = '';
-      shitaiesArray.$sve(shitai);
+      shitaiesArray.$save(shitai);
 
       // 音ならす
       var callbell = new Audio($('base').prop('href') + 'audio/linelike.mp3');
