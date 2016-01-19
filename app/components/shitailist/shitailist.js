@@ -42,21 +42,6 @@
     var shitaies = vm.ShitaiesService.findShitaies();
     vm.items = shitaies;
 
-    // プロファイル一覧
-    var profiles = vm.ProfilesService.getProfiles();
-
-    // 名前解決
-    shitaies.$loaded().then(function (x) {
-      profiles.$loaded().then(function (x) {
-        for (var i = 0; i < shitaies.length; i++) {
-          var profile = profiles.$getRecord(shitaies[i].userid);
-          if (profile) {
-            shitaies[i].username = profile.username;
-          }
-        }
-      });
-    });
-
     // プロファイル保持
     vm.profile = vm.ProfilesService.getStorageProfile();
   };

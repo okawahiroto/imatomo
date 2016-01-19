@@ -65,13 +65,13 @@
         // 更新
         shitaiesArray.$loaded().then(function(x) {
           var profile =  ProfilesService.getStorageProfile();
-          var p = shitaiesArray.$getRecord(id);
-          if (!p.approvals) {
-            p.approvals = [];
+          var s = shitaiesArray.$getRecord(id);
+          if (!s.approvals) {
+            s.approvals = [];
           }
-          p.approvals.push({userid : profile.userid});
-          p.lastApprovalUserid = profile.userid;
-          shitaiesArray.$save(p);
+          s.approvals.push({userid : profile.userid});
+          s.lastApprovalUserid = profile.userid;
+          shitaiesArray.$save(s);
         });
       },
 
@@ -87,6 +87,7 @@
             return a.userid !== profile.userid;
           });
           s.approvals = newApprovals;
+          s.lastApprovalUserid = '';
           shitaiesArray.$save(s);
           if (aftfnc) {
             aftfnc();
@@ -112,6 +113,14 @@
       var profile =  ProfilesService.getStorageProfile();
       var shitai = shitaiesArray.$getRecord(event.key);
 
+      // 自分の $add 'child_changed' だったら何もしない
+      if (shitaiesService.selfApproval) {
+        console.log('shitaiesService.selfApproval=' + shitaiesService.selfApproval);
+        console.log('自分の $add child_changed だったら何もしない');
+        shitaiesService.selfApproval = false;
+        return;
+      }
+
       // 賛同する更新じゃなければ無視
       console.log('shitai.lastApprovalUserid = ' + shitai.lastApprovalUserid);
       if (!shitai.lastApprovalUserid) {
@@ -126,18 +135,12 @@
         return;
       }
 
-      // 自分の $add 'child_changed' だったら何もしない
-      if (shitaiesService.selfApproval) {
-        console.log('shitaiesService.selfApproval=' + shitaiesService.selfApproval);
-        console.log('自分の $add child_changed だったら何もしない');
-        shitaiesService.selfApproval = false;
-        return;
-      }
-
       // 参加者を取得
       var newMemberId = shitai.lastApprovalUserid;
       var newMember = ProfilesService.getProfiles().$getRecord(newMemberId);
       toaster.pop('success', '仲間があらわれた！', newMember.username + ' さんがあなたに賛同しました。');
+
+      console.log('仲間があらわれた！！！！！！！！！！！！！！！');
 
       // 最終賛同者をすぐさまクリア
       shitai.lastApprovalUserid = '';

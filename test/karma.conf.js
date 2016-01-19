@@ -33,6 +33,7 @@ module.exports = function(config) {
       'app/components/shitai/shitai.js',
       'app/components/shitaidetail/shitaidetail.js',
       'app/components/shitailist/shitailist.js',
+      'app/directives/username/username.js',
       'app/scripts/config.js',
       'app/service/groups/groups.js',
       'app/service/gruntfiles/gruntfiles.js',
