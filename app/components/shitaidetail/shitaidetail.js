@@ -13,7 +13,7 @@
     ])
     .controller('ShitaidetailController', ShitaidetailController);
 
-  ShitaidetailController.$inject = ['$routeParams', 'ShitaiesService', 'ProfilesService'];
+  ShitaidetailController.$inject = ['$location', '$routeParams', 'ShitaiesService', 'ProfilesService'];
 
   /**
    * ShitaidetailController
@@ -21,8 +21,9 @@
    * @class ShitaidetailController
    * @constructor
    */
-  function ShitaidetailController($routeParams, ShitaiesService, ProfilesService) {
+  function ShitaidetailController($location, $routeParams, ShitaiesService, ProfilesService) {
     console.log('ShitaidetailController Constructor');
+    this.$location = $location;
     this.id = $routeParams.id;
     this.ShitaiesService = ShitaiesService;
     this.ProfilesService = ProfilesService;
@@ -86,6 +87,26 @@
       }
     });
     vm.approvals = approvalsMembers;
+  };
+
+  /**
+   * 削除ボタン
+   */
+  ShitaidetailController.prototype.shitaiDelete = function() {
+    console.log('ShitaidetailController shitaiDelete Method');
+
+    // したい一覧
+    var shitaiesArray = vm.ShitaiesService.findShitaies();
+
+    for (var i = 0; i < shitaiesArray.length; i++) {
+      if (vm.id === shitaiesArray[i].$id) {
+        console.log(shitaiesArray[i]);
+        shitaiesArray.$remove(i);
+      }
+    }
+
+    // 一覧画面へ
+    vm.$location.path('/shitailist/');
   };
 
 })();
