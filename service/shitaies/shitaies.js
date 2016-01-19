@@ -86,7 +86,7 @@
             return a.userid !== profile.userid;
           });
           s.approvals = newApprovals;
-          //shitaiesArray.$save(s);
+          shitaiesArray.$save(s);
           if (aftfnc) {
             aftfnc();
           }
