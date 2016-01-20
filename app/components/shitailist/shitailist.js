@@ -127,23 +127,6 @@
   };
 
   /**
-   * 削除ボタンを表示できるか検証する
-   */
-  ShitailistController.prototype.isRemove = function(shitai) {
-    // ユーザ登録がまだなら非表示
-    if (!vm.profile) {
-      return false;
-    }
-
-    // 自分が公言したものなら表示
-    if (shitai.userid === vm.profile.userid) {
-      return true;
-    }
-
-    return false;
-  };
-
-  /**
    * Angular ViewModel
    *
    * @property vm

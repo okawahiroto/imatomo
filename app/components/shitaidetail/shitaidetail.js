@@ -110,21 +110,4 @@
     vm.$location.path('/shitailist/');
   };
 
-  /**
-   * 削除するが可能か
-   */
-  ShitaidetailController.prototype.isShitaiDelete = function() {
-
-    if (!vm.profile) {
-      return false;
-    }
-
-    // 自分の公言なら表示
-    if (vm.userid === vm.profile.userid) {
-      return true;
-    }
-
-    return false;
-  };
-
 })();
