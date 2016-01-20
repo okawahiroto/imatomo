@@ -20,7 +20,7 @@
 # Firease項目定義
 
 
-プロファイル　項目定義
+プロファイル　項目定義（ここはソーシャル認証に持っていくかな...）
 * $id         ：ID
 * usernane    ：利用者名
 
@@ -33,6 +33,7 @@
 * place       ：どこで
 * comment     ：コメント
 * craetetimestamp ：登録日時
+* lastApprovalUserid  ：最後に賛同した人のユーザID
 * approvals   ：賛同した人一覧（予定）
      userid
 
