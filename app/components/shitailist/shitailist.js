@@ -46,6 +46,23 @@
     vm.profile = vm.ProfilesService.getStorageProfile();
   };
 
+  //ローカルストレージに格納されているuseridを取得
+  // var a = window.localStorage.getItem("profile");
+  // var b = JSON.parse(a);
+  // console.log(b["userid"]);
+  // var userid = b["userid"];
+
+  //useridによるfilter
+  ShitailistController.prototype.setFilter = function(userid) {
+      console.log('ShitailistController setFilter Method');
+      if (userid) {
+        vm.useridFilter = {userid : userid};
+        console.log(userid);
+      } else {
+        vm.useridFilter = undefined;
+      }
+    };
+
   /**
    * 賛同する
    */
