@@ -10,8 +10,8 @@
     <label for="time" class="col-sm-2 control-label">いつ？</label>
     <div class="col-sm-10">
       <p class="input-group">
-        <input type="text" class="form-control" uib-datepicker-popup ng-model="shitai.time" is-open="shitai.opened"
-        close-text="Close" id="time" min-date="shitai.today" required />
+        <input type="text" class="form-control" ng-model="shitai.time" is-open="shitai.opened"
+        close-text="Close" id="time" min-date="shitai.today" required uib-datepicker-popup />
         <span class="input-group-btn">
           <button type="button" class="btn btn-default" ng-click="shitai.opened=true;"><i class="glyphicon glyphicon-calendar"></i></button>
         </span>

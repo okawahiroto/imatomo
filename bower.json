@@ -10,7 +10,8 @@
     "firebase": "~2.3.2",
     "angularjs-toaster": "~0.4.181",
     "angular-animate": "~1.4.8",
-    "angular-bootstrap": "~1.1.1"
+    "angular-bootstrap": "~1.1.1",
+    "angular-i18n": "~1.4.9"
   },
   "overrides": {
     "angular-new-router": {
@@ -18,6 +19,9 @@
     },
     "bootstrap": {
       "main": "dist/css/bootstrap.css"
+    },
+    "angular-i18n": {
+      "main": "angular-locale_ja-jp.js"
     }
   },
   "devDependencies": {

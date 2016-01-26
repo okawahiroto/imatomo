@@ -65,7 +65,7 @@
       userid : profile.userid,
       //username : profile.username,
       title: vm.title,
-      time: vm.time,
+      time: vm.time.getTime(),
       comment : (vm.comment === undefined ? '' : vm.comment),
       place: (vm.place === undefined ? '' : vm.place),
       group: (vm.place === undefined ? '' : vm.group),

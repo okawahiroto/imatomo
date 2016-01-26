@@ -14,12 +14,12 @@
     <tr ng-repeat="data in shitailist.items | filter: shitailist.useridFilter">
       <td userid={{data.userid}}></td>
       <td>{{data.name}}</td>
-      <td>{{data.time}}</td>
       <td>
         <span class="badge">{{data.approvals ? data.approvals.length : 0 }}</span>
         {{data.title}}
       </td>
-      <td>{{data.createtimestamp | date : 'M/dd HH:mm'}}</td>
+      <td>{{data.time | date : 'M/dd (EEE)'}}</td>
+      <!--<td>{{data.createtimestamp | date : 'M/dd HH:mm'}}</td>-->
       <td>
         <button type="button" class="btn btn-info" ng-click="shitailist.moveDetail(data.$id)">
           詳細
