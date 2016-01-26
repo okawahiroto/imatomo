@@ -45,23 +45,12 @@
 
     // グループ取得
     vm.GroupsService.getGroup(vm.id, function(group) {
-
       profiles.$loaded().then(function (x) {
-        if (group.members) {
-          for (var i = 0; i < group.members.length; i++) {
-            var profile = profiles.$getRecord(group.members[i].userid);
-            if (profile) {
-              group.members[i].username = profile.username;
-            }
-          }
-        }
-
         var creator = profiles.$getRecord(group.createuserid);
         if (creator) {
           vm.createusername = creator.username;
         }
       });
-
       vm.group = group;
     });
   };

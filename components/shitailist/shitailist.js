@@ -42,24 +42,26 @@
     var shitaies = vm.ShitaiesService.findShitaies();
     vm.items = shitaies;
 
-    // プロファイル一覧
-    var profiles = vm.ProfilesService.getProfiles();
-
-    // 名前解決
-    shitaies.$loaded().then(function (x) {
-      profiles.$loaded().then(function (x) {
-        for (var i = 0; i < shitaies.length; i++) {
-          var profile = profiles.$getRecord(shitaies[i].userid);
-          if (profile) {
-            shitaies[i].username = profile.username;
-          }
-        }
-      });
-    });
-
     // プロファイル保持
     vm.profile = vm.ProfilesService.getStorageProfile();
   };
+
+  //ローカルストレージに格納されているuseridを取得
+  // var a = window.localStorage.getItem("profile");
+  // var b = JSON.parse(a);
+  // console.log(b["userid"]);
+  // var userid = b["userid"];
+
+  //useridによるfilter
+  ShitailistController.prototype.setFilter = function(userid) {
+      console.log('ShitailistController setFilter Method');
+      if (userid) {
+        vm.useridFilter = {userid : userid};
+        console.log(userid);
+      } else {
+        vm.useridFilter = undefined;
+      }
+    };
 
   /**
    * 賛同する

@@ -1,13 +1,25 @@
+<ul class="nav nav-tabs">
+  <li class="active">
+    <a data-toggle="tab"  ng-click="shitailist.useridFilter = undefined">全部</a>
+  </li>
+  <li>
+    <a data-toggle="tab" ng-click="shitailist.useridFilter = -K8ZDjiKxvW4w0VyC5Cx">自分</a>
+  </li>
+  <li>
+    <a data-toggle="tab" ng-click="shitailist.useridFilter = undefined">賛同している</a>
+  </li>
+</ul>
+
 <table class="table table-striped">
-    <tr ng-repeat="data in shitailist.items">
-      <td>{{data.username}}</td>
+    <tr ng-repeat="data in shitailist.items | filter: shitailist.useridFilter">
+      <td userid={{data.userid}}></td>
       <td>{{data.name}}</td>
-      <td>{{data.time}}</td>
       <td>
         <span class="badge">{{data.approvals ? data.approvals.length : 0 }}</span>
         {{data.title}}
       </td>
-      <td>{{data.createtimestamp | date : 'M/dd HH:mm'}}</td>
+      <td>{{data.time | date : 'M/dd (EEE)'}}</td>
+      <!--<td>{{data.createtimestamp | date : 'M/dd HH:mm'}}</td>-->
       <td>
         <button type="button" class="btn btn-info" ng-click="shitailist.moveDetail(data.$id)">
           詳細
@@ -24,7 +36,7 @@
         </button>
       </td>
       <td>
-        <button type="button" class="btn btn-primary" ng-click="shitailist.items.$remove(data)">
+        <button type="button" class="btn btn-primary" ng-click="shitailist.items.$remove(data)" ng-show="shitailist.profile.userid == data.userid">
           削除
         </button>
       </td>
