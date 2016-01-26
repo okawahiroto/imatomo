@@ -13,6 +13,7 @@
       'firebase',
       'toaster',
       'ngAnimate',
+      'ui.bootstrap',
       'imatomo.directives.userid',
       'imatomo.components.shitailist',
       'imatomo.components.shitai',

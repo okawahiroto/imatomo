@@ -1,18 +1,28 @@
 <alert type="{{shitai.status}}" ng-show="!!shitai.message" close="shitai.closeAlert()">{{shitai.message}}</alert>
 <form class="form-horizontal" name="shitais" ng-submit="shitai.register()" novalidate>
   <div class="form-group">
+
     <label for="title" class="col-sm-2 control-label">公言！</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="title" placeholder="飲みに行きたい！！" ng-model="shitai.title" required>
     </div>
+
     <label for="time" class="col-sm-2 control-label">いつ？</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="time" placeholder="今日の夜" ng-model="shitai.time" required>
+      <p class="input-group">
+        <input type="text" class="form-control" uib-datepicker-popup ng-model="shitai.time" is-open="shitai.opened"
+        close-text="Close" id="time" min-date="shitai.today" required />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="shitai.opened=true;"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </p>
     </div>
+
     <label for="place" class="col-sm-2 control-label">どこで？</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="place" placeholder="天文館" ng-model="shitai.place">
+      <input type="text" class="form-control" id="place" placeholder="天文館" ng-model="shitai.placeshitai.opened">
     </div>
+
     <label for="group" class="col-sm-2 control-label">グループ</label>
     <div class="col-sm-10">
       <select class="form-control" id="group" ng-model="shitai.groupList.$id" required>
@@ -20,11 +30,13 @@
         <option ng-repeat="data in shitai.groupList" ng-show="shitai.searchMember(data)">{{data.groupname}}</option>
       </select>
     </div>
+
     <label for="comment" class="col-sm-2 control-label">備考</label>
     <div class="col-sm-10">
       <textarea id="comment" rows="5" placeholder="" class="form-control" ng-model="shitai.comment"></textarea>
     </div>
   </div>
+
   <div class="form-group">
     <div class="col-sm-2"></div>
     <div class="col-sm-10">

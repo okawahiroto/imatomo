@@ -43,6 +43,7 @@
 
     var groupList = vm.GroupsService.findGroups();
     vm.groupList = groupList;
+    vm.today = new Date();
   };
 
   /**
