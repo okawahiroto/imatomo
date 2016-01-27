@@ -11,7 +11,7 @@
 </ul>
 
 <table class="table table-striped">
-    <tr ng-repeat="data in shitailist.items | filter: shitailist.useridFilter">
+    <tr ng-repeat="data in shitailist.items | filter: shitailist.useridFilter | orderBy: 'time'">
       <td userid={{data.userid}}></td>
       <td>{{data.name}}</td>
       <td>
