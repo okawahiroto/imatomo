@@ -2,19 +2,23 @@
 <form class="form-horizontal" name="shitais" ng-submit="shitai.register()" novalidate>
   <div class="form-group">
 
-    <label for="title" class="col-sm-2 control-label">公言！</label>
+    <label for="title" class="col-sm-2 control-label">公言</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="title" placeholder="飲みに行きたい！！" ng-model="shitai.title" required>
     </div>
 
-    <label for="time" class="col-sm-2 control-label">いつ？</label>
+    <label for="date" class="col-sm-2 control-label">期限</label>
     <div class="col-sm-10">
       <p class="input-group">
-        <input type="text" class="form-control" ng-model="shitai.time" is-open="shitai.opened"
-        close-text="Close" id="time" min-date="shitai.today" required uib-datepicker-popup />
+        <input type="text" id="date" class="form-control" ng-model="shitai.date" is-open="shitai.opened" close-text="Close"
+          datepicker-options="shitai.datePickerOptions" min-date="shitai.today" uib-datepicker-popup="{{'yyyy年M月d日 (EEE)'}}"
+          ng-readonly="true" style="background-color:#ffffff;" required/>
         <span class="input-group-btn">
           <button type="button" class="btn btn-default" ng-click="shitai.opened=true;"><i class="glyphicon glyphicon-calendar"></i></button>
         </span>
+      </p>
+      <p class="input-group">
+        <uib-timepicker ng-model="shitai.time" hour-step="1" minute-step="30" arrowkeys="false" show-meridian="false"/>
       </p>
     </div>
 

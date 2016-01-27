@@ -70,7 +70,10 @@
       vm.groupList.$id = vm.groupList[0].$id;
     });
 
-    vm.today = new Date();
+    // 期限に関する設定
+    var currentTimestamp = new Date();
+    vm.today = currentTimestamp;
+    vm.time = new Date().setHours(currentTimestamp.getHours() + 1, 0, 0, 0);
   };
 
   /**
@@ -88,11 +91,20 @@
       return;
     }
 
+    // 期限
+    var limitDate = vm.date;
+    limitDate.setHours(new Date(vm.time).getHours(), new Date(vm.time).getMinutes(), 59, 0);
+    if (limitDate.getTime() < new Date().getTime()) {
+      vm.status = 'dengire';
+      vm.message = '期限に過去が設定されています。';
+      return;
+    }
+
     var shitai = {
       userid : profile.userid,
       //username : profile.username,
       title: vm.title,
-      time: vm.time.getTime(),
+      time: limitDate.getTime(),
       comment : (vm.comment === undefined ? '' : vm.comment),
       place: (vm.place === undefined ? '' : vm.place),
       group: (vm.groupList.$id === undefined ? '' : vm.groupList.$id),
