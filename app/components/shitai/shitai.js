@@ -56,11 +56,15 @@
 
     groupList.$loaded().then(function (x) {
       for (var i = 0; i < groupList.length; i++) {
-        var wg = {
-          $id: groupList[i].$id,
-          groupname: groupList[i].groupname
-        };
-        newgroupList.push(wg);
+        for (var j = 0; j < groupList[i].members.length; j++) {
+          if (groupList[i].members[j].userid === vm.profile.userid) {
+            var wg = {
+              $id: groupList[i].$id,
+              groupname: groupList[i].groupname
+            };
+            newgroupList.push(wg);
+          }
+        }
       }
       vm.groupList = newgroupList;
       vm.groupList.$id = vm.groupList[0].$id;
@@ -95,7 +99,6 @@
       createtimestamp : Firebase.ServerValue.TIMESTAMP
     };
 
-    console.log(shitai);
     // Firebaseに追加
     vm.ShitaiesService.addShitai(shitai, function() {
       // shitailistへ遷移
