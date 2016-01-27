@@ -11,14 +11,14 @@
 </ul>
 
 <table class="table table-striped">
-    <tr ng-repeat="data in shitailist.items | filter: shitailist.useridFilter">
+    <tr ng-repeat="data in shitailist.items | filter: shitailist.useridFilter | orderBy: 'time'" ng-if="data.time >= shitailist.filterDate">
       <td userid={{data.userid}}></td>
       <td>{{data.name}}</td>
       <td>
         <span class="badge">{{data.approvals ? data.approvals.length : 0 }}</span>
         {{data.title}}
       </td>
-      <td>{{data.time | date : 'M/dd (EEE)'}}</td>
+      <td>{{data.time | date : 'M/dd (EEE) HH:mm'}}</td>
       <!--<td>{{data.createtimestamp | date : 'M/dd HH:mm'}}</td>-->
       <td>
         <button type="button" class="btn btn-info" ng-click="shitailist.moveDetail(data.$id)">

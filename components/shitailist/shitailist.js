@@ -44,6 +44,9 @@
 
     // プロファイル保持
     vm.profile = vm.ProfilesService.getStorageProfile();
+
+    // 期限のフィルタリング条件 (秒単位でみたらおかしいけど、、いまはもういいや)
+    vm.filterDate = new Date().getTime();
   };
 
   //ローカルストレージに格納されているuseridを取得
