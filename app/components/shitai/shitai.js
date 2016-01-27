@@ -53,18 +53,18 @@
 
     // firebaseグループ作成
     var groupList = vm.GroupsService.findGroups();
-    for (var i = 0; i < groupList.length; i++) {
-      var wg = {
-        $id: groupList[i].$id,
-        groupname: groupList[i].groupname
-      };
-      newgroupList.push(wg);
-    }
-    for (var j = 0; j < newgroupList.length; j++) {
-      console.log('newgroupList[' + j + '].groupname:' + newgroupList[j].groupname);
-    }
-    vm.groupList = newgroupList;
-    vm.groupList.$id = vm.groupList[0].$id;
+
+    groupList.$loaded().then(function (x) {
+      for (var i = 0; i < groupList.length; i++) {
+        var wg = {
+          $id: groupList[i].$id,
+          groupname: groupList[i].groupname
+        };
+        newgroupList.push(wg);
+      }
+      vm.groupList = newgroupList;
+      vm.groupList.$id = vm.groupList[0].$id;
+    });
 
     vm.today = new Date();
   };
@@ -95,6 +95,7 @@
       createtimestamp : Firebase.ServerValue.TIMESTAMP
     };
 
+    console.log(shitai);
     // Firebaseに追加
     vm.ShitaiesService.addShitai(shitai, function() {
       // shitailistへ遷移
