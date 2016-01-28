@@ -157,12 +157,8 @@
     }
 
     // 「グループ：自身が所属しているグループ」の公言は表示
-    console.log('data:' + data);
     var groupList = vm.GroupsService.findGroups();
-    console.log('groupList:' + groupList);
     for (var i = 0; i < groupList.length; i++) {
-      console.log('groupList[' + i + '].$id:' + groupList[i].$id);
-      console.log('groupList[' + i + '].groupname:' + groupList[i].groupname);
       if (groupList[i].$id === data.group) {
         for (var j = 0; j < groupList[i].members.length; j++) {
           if (groupList[i].members[j].userid === vm.profile.userid) {
