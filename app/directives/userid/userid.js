@@ -20,7 +20,6 @@
       ProfilesService.getProfiles().$loaded().then(function (x) {
         var profile = profiles.$getRecord(attrs.userid);
         if (profile) {
-          console.log(profile.username);
           element.append(profile.username);
         }
       });
