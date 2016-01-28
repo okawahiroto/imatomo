@@ -11,7 +11,7 @@
 </ul>
 
 <table class="table table-striped">
-    <tr ng-repeat="data in shitailist.items | filter: shitailist.useridFilter | orderBy: 'time'" ng-if="data.time >= shitailist.filterDate">
+    <tr ng-repeat="data in shitailist.items | filter: shitailist.useridFilter | orderBy: 'time'" ng-if="data.time >= shitailist.filterDate" ng-show="shitailist.searchMember(data)">
       <td userid={{data.userid}}></td>
       <td>{{data.name}}</td>
       <td>

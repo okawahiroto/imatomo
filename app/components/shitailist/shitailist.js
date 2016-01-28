@@ -9,11 +9,12 @@
   angular
     .module('imatomo.components.shitailist', [
       'imatomo.service.shitaies',
-      'imatomo.service.profiles'
+      'imatomo.service.profiles',
+      'imatomo.service.groups'
     ])
     .controller('ShitailistController', ShitailistController);
 
-  ShitailistController.$inject = ['$location', 'ShitaiesService', 'ProfilesService'];
+  ShitailistController.$inject = ['$location', 'ShitaiesService', 'ProfilesService', 'GroupsService'];
 
   /**
    * ShitailistController
@@ -21,11 +22,12 @@
    * @class ShitailistController
    * @constructor
    */
-  function ShitailistController($location, ShitaiesService, ProfilesService) {
+  function ShitailistController($location, ShitaiesService, ProfilesService, GroupsService) {
     console.log('ShitailistController Constructor');
     this.ShitaiesService = ShitaiesService;
     this.ProfilesService = ProfilesService;
     this.$location = $location;
+    this.GroupsService = GroupsService;
   }
 
   /**
@@ -144,6 +146,34 @@
   ShitailistController.prototype.moveDetail = function(id) {
     console.log('ShitailistController moveDetail Method');
     vm.$location.path('/shitaidetail/' + id);
+  };
+
+  ShitailistController.prototype.searchMember = function(data) {
+    console.log('ShitailistController searchMember Method');
+
+    //「グループ：みんな」の公言は表示
+    if (data.group === '') {
+      return true;
+    }
+
+    // 「グループ：自身が所属しているグループ」の公言は表示
+    console.log('data:' + data);
+    var groupList = vm.GroupsService.findGroups();
+    console.log('groupList:' + groupList);
+    for (var i = 0; i < groupList.length; i++) {
+      console.log('groupList[' + i + '].$id:' + groupList[i].$id);
+      console.log('groupList[' + i + '].groupname:' + groupList[i].groupname);
+      if (groupList[i].$id === data.group) {
+        for (var j = 0; j < groupList[i].members.length; j++) {
+          if (groupList[i].members[j].userid === vm.profile.userid) {
+            return true;
+          }
+        }
+      }
+    }
+
+    // 「グループ：自身が所属していないグループ」の公言は非表示
+    return false;
   };
 
   /**
