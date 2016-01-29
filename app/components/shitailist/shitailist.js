@@ -58,15 +58,15 @@
   // var userid = b["userid"];
 
   //useridによるfilter
-  ShitailistController.prototype.setFilter = function(userid) {
-      console.log('ShitailistController setFilter Method');
-      if (userid) {
-        vm.useridFilter = {userid : userid};
-        console.log(userid);
-      } else {
-        vm.useridFilter = undefined;
-      }
-    };
+  // ShitailistController.prototype.setFilter = function(userid) {
+  //     console.log('ShitailistController setFilter Method');
+  //     if (userid) {
+  //       vm.useridFilter = {userid : userid};
+  //       console.log(userid);
+  //     } else {
+  //       vm.useridFilter = undefined;
+  //     }
+  //   };
 
   /**
    * 賛同する
