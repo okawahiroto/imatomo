@@ -87,3 +87,15 @@ body {
     border-bottom: 0;
   }
 }
+
+@media screen and (max-width: 600px) {
+  table {
+    background-color: white;
+  }
+  td {
+  display: list-item;
+  text-align: center;
+  background-color: white;
+  list-style: none;
+  }
+}
