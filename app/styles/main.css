@@ -88,14 +88,14 @@ body {
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 480px) {
   table {
-    background-color: white;
+    font-size: 80%;
   }
-  td {
+  /*td {
   display: list-item;
+  list-style: none;
   text-align: center;
   background-color: white;
-  list-style: none;
-  }
+  }*/
 }
