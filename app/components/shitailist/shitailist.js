@@ -51,22 +51,28 @@
     vm.filterDate = new Date().getTime();
   };
 
-  //ローカルストレージに格納されているuseridを取得
-  // var a = window.localStorage.getItem("profile");
-  // var b = JSON.parse(a);
-  // console.log(b["userid"]);
-  // var userid = b["userid"];
+  ShitailistController.prototype.searchMyApprovals = function() {
+    console.log('ShitailistController searchMyApprovals Method');
+    console.log(vm.items);
+    console.log(vm.items.length);
+    var array = vm.items[0].approvals.length;
+    console.log(array);
 
-  //useridによるfilter
-  // ShitailistController.prototype.setFilter = function(userid) {
-  //     console.log('ShitailistController setFilter Method');
-  //     if (userid) {
-  //       vm.useridFilter = {userid : userid};
-  //       console.log(userid);
-  //     } else {
-  //       vm.useridFilter = undefined;
-  //     }
-  //   };
+    for (var i = 0; i < vm.items.length; i++) {
+      console.log(vm.items[i].approvals);
+      for (var j = 0; j < vm.items[i].approvals.length; j++) {
+        if (vm.items[i].approvals[j].userid === vm.profile.userid) {
+          console.log('b');
+          console.log(i);
+          console.log(j);
+          console.log(vm.items[i].$id);
+          console.log(vm.items[i].approvals[j].userid);
+          return true;
+        }
+        return false;
+      }
+    }
+  };
 
   /**
    * 賛同する
