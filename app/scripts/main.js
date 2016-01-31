@@ -14,6 +14,7 @@
       'toaster',
       'ngAnimate',
       'ui.bootstrap',
+      'directive.g+signin',
       'imatomo.directives.userid',
       'imatomo.components.shitailist',
       'imatomo.components.shitai',
