@@ -51,9 +51,8 @@
     };
     newgroupList.push(allgroup);
 
-    // firebaseグループ作成
+    // グループ一覧取得（自身が所属しているグループのみ）
     var groupList = vm.GroupsService.findGroups();
-
     groupList.$loaded().then(function (x) {
       for (var i = 0; i < groupList.length; i++) {
         for (var j = 0; j < groupList[i].members.length; j++) {
@@ -133,16 +132,6 @@
     console.log('close');
     vm.status = '';
     vm.message = '';
-  };
-
-  ShitaiController.prototype.searchMember = function(group) {
-    console.log('ShitaiController searchMember Method');
-    for (var i = 0; i < group.members.length; i++) {
-      if (group.members[i].userid === vm.profile.userid) {
-        return true;
-      }
-    }
-    return false;
   };
 
 })();

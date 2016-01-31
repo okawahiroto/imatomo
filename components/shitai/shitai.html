@@ -29,10 +29,6 @@
 
     <label for="group" class="col-sm-2 control-label">グループ</label>
     <div class="col-sm-10">
-      <!--<select class="form-control" id="group" ng-model="shitai.groupList.$id" required>
-        <option>みんなと</option>
-        <option ng-repeat="data in shitai.groupList" ng-show="shitai.searchMember(data)">{{data.groupname}}</option>
-      </select>-->
       <select class="form-control" ng-model="shitai.groupList.$id"
               ng-options="data.$id as data.groupname for data in shitai.groupList">
       </select>
