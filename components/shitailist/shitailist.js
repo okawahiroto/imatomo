@@ -9,12 +9,11 @@
   angular
     .module('imatomo.components.shitailist', [
       'imatomo.service.shitaies',
-      'imatomo.service.profiles',
       'imatomo.service.groups'
     ])
     .controller('ShitailistController', ShitailistController);
 
-  ShitailistController.$inject = ['$location', 'ShitaiesService', 'ProfilesService', 'GroupsService'];
+  ShitailistController.$inject = ['$location', 'ImatomoValue', 'ShitaiesService', 'GroupsService'];
 
   /**
    * ShitailistController
@@ -22,11 +21,11 @@
    * @class ShitailistController
    * @constructor
    */
-  function ShitailistController($location, ShitaiesService, ProfilesService, GroupsService) {
+  function ShitailistController($location, ImatomoValue, ShitaiesService, GroupsService) {
     console.log('ShitailistController Constructor');
     this.ShitaiesService = ShitaiesService;
-    this.ProfilesService = ProfilesService;
     this.$location = $location;
+    this.ImatomoValue = ImatomoValue;
     this.GroupsService = GroupsService;
   }
 
@@ -39,9 +38,6 @@
   ShitailistController.prototype.activate = function() {
     console.log('ShitailistController activate Method');
     vm = this;
-
-    // プロファイル保持
-    vm.profile = vm.ProfilesService.getStorageProfile();
 
     // グループ一覧取得
     var groupList = vm.GroupsService.findGroups();
@@ -67,7 +63,7 @@
     for (var i = 0; i < vm.items.length; i++) {
       console.log(vm.items[i].approvals);
       for (var j = 0; j < vm.items[i].approvals.length; j++) {
-        if (vm.items[i].approvals[j].userid === vm.profile.userid) {
+        if (vm.items[i].approvals[j].userid === vm.ImatomoValue.profile.id) {
           console.log('b');
           console.log(i);
           console.log(j);
@@ -100,13 +96,15 @@
    * 賛同ボタンを表示できるか検証する
    */
   ShitailistController.prototype.isApproval = function(shitai) {
-    // ユーザ登録がまだなら非表示
-    if (!vm.profile) {
+
+    if (!vm.ImatomoValue.profile) {
       return false;
     }
 
     // 自分が公言したものなら非表示
-    if (shitai.userid === vm.profile.userid) {
+    console.log('ヴぁぅえの値 = ');
+    console.log(vm.ImatomoValue.profile);
+    if (shitai.userid === vm.ImatomoValue.profile.id) {
       return false;
     }
 
@@ -117,7 +115,7 @@
 
     var isshow = true;
     shitai.approvals.forEach(function(s) {
-      if (s.userid === vm.profile.userid) {
+      if (s.userid === vm.ImatomoValue.profile.id) {
         isshow = false;
       }
     });
@@ -128,13 +126,13 @@
    * キャンセルボタンを表示できるか検証する
    */
   ShitailistController.prototype.isCancel = function(shitai) {
-    // ユーザ登録がまだなら非表示
-    if (!vm.profile) {
+
+    if (!vm.ImatomoValue.profile) {
       return false;
     }
 
     // 自分が公言したものなら非表示
-    if (shitai.userid === vm.profile.userid) {
+    if (shitai.userid === vm.ImatomoValue.profile.id) {
       return false;
     }
 
@@ -145,7 +143,7 @@
 
     var isshow = false;
     shitai.approvals.forEach(function(s) {
-      if (s.userid === vm.profile.userid) {
+      if (s.userid === vm.ImatomoValue.profile.id) {
         isshow = true;
       }
     });
@@ -177,7 +175,7 @@
     for (var i = 0; i < vm.groupList.length; i++) {
       if (vm.groupList[i].$id === data.group) {
         for (var j = 0; j < vm.groupList[i].members.length; j++) {
-          if (vm.groupList[i].members[j].userid === vm.profile.userid) {
+          if (vm.groupList[i].members[j].userid === vm.ImatomoValue.profile.id) {
             return true;
           }
         }

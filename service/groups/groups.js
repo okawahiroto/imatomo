@@ -12,7 +12,7 @@
     ])
     .factory('GroupsService', GroupsService);
 
-  GroupsService.$inject = ['$firebaseArray', 'ProfilesService'];
+  GroupsService.$inject = ['$firebaseArray', 'ImatomoValue'];
 
   /**
    * GroupsService
@@ -20,7 +20,7 @@
    * @class GroupsService
    * @constructor
    */
-  function GroupsService($firebaseArray, ProfilesService) {
+  function GroupsService($firebaseArray, ImatomoValue) {
 
     var ref = new Firebase('https://resplendent-inferno-2076.firebaseio.com/groups');
     var groupsArray = $firebaseArray(ref);
@@ -59,14 +59,13 @@
       /*
        * メンバー追加
        */
-      addMember: function(id, memberid) {
+      addMember: function(id) {
         groupsArray.$loaded().then(function(x) {
-          var profile =  ProfilesService.getStorageProfile();
           var g = groupsArray.$getRecord(id);
           if (!g.members) {
             g.members = [];
           }
-          g.members.push({userid : profile.userid, username : profile.username});
+          g.members.push({userid : ImatomoValue.profile.id, username : ImatomoValue.profile.name});
           groupsArray.$save(g);
         });
       },
@@ -76,10 +75,9 @@
        */
       removeMember: function(id, userid, aftfnc) {
         groupsArray.$loaded().then(function(x) {
-          var profile =  ProfilesService.getStorageProfile();
           var g = groupsArray.$getRecord(id);
           var newMembers = g.members.filter(function(m) {
-            return m.userid !== profile.userid;
+            return m.userid !== ImatomoValue.profile.id;
           });
           if (newMembers.length === 0)  {
             groupsService.removeGroup(id, aftfnc);

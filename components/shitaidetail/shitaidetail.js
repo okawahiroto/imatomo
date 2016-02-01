@@ -14,7 +14,7 @@
     ])
     .controller('ShitaidetailController', ShitaidetailController);
 
-  ShitaidetailController.$inject = ['$location', '$routeParams', 'ShitaiesService', 'ProfilesService', 'GroupsService'];
+  ShitaidetailController.$inject = ['$location', '$routeParams', 'ImatomoValue', 'ShitaiesService', 'ProfilesService', 'GroupsService'];
 
   /**
    * ShitaidetailController
@@ -22,13 +22,13 @@
    * @class ShitaidetailController
    * @constructor
    */
-  function ShitaidetailController($location, $routeParams, ShitaiesService, ProfilesService, GroupsService) {
+  function ShitaidetailController($location, $routeParams, ImatomoValue, ShitaiesService, ProfilesService, GroupsService) {
     console.log('ShitaidetailController Constructor');
     this.$location = $location;
     this.id = $routeParams.id;
+    this.ImatomoValue = ImatomoValue;
     this.ShitaiesService = ShitaiesService;
     this.ProfilesService = ProfilesService;
-    this.profile = ProfilesService.getStorageProfile();
     this.GroupsService = GroupsService;
   }
 
@@ -70,9 +70,10 @@
 
     // 名前解決
     profiles.$loaded().then(function (x) {
-      var profile = profiles.$getRecord(shitaiItem.userid);
-      if (profile) {
-        vm.username = profile.username;
+      for (var i = 0; i < profiles.length; i++) {
+        if (profiles[i].userid === shitaiItem.userid) {
+          vm.username = profiles[i].username;
+        }
       }
     });
 
@@ -135,13 +136,13 @@
    * 賛同ボタンを表示できるか検証する
    */
   ShitaidetailController.prototype.isApproval = function(shitai) {
-    // ユーザ登録がまだなら非表示
-    if (!vm.profile) {
+
+    if (!vm.ImatomoValue.profile) {
       return false;
     }
 
     // 自分が公言したものなら非表示
-    if (shitai.userid === vm.profile.userid) {
+    if (shitai.userid === vm.ImatomoValue.profile.id) {
       return false;
     }
 
@@ -152,7 +153,7 @@
 
     var isshow = true;
     shitai.approvals.forEach(function(s) {
-      if (s.userid === vm.profile.userid) {
+      if (s.userid === vm.ImatomoValue.profile.id) {
         isshow = false;
       }
     });
@@ -163,13 +164,13 @@
    * キャンセルボタンを表示できるか検証する
    */
   ShitaidetailController.prototype.isCancel = function(shitai) {
-    // ユーザ登録がまだなら非表示
-    if (!vm.profile) {
+
+    if (!vm.ImatomoValue.profile) {
       return false;
     }
-
+    
     // 自分が公言したものなら非表示
-    if (shitai.userid === vm.profile.userid) {
+    if (shitai.userid === vm.ImatomoValue.profile.id) {
       return false;
     }
 
@@ -180,7 +181,7 @@
 
     var isshow = false;
     shitai.approvals.forEach(function(s) {
-      if (s.userid === vm.profile.userid) {
+      if (s.userid === vm.ImatomoValue.profile.id) {
         isshow = true;
       }
     });

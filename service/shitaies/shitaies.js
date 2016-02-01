@@ -12,7 +12,7 @@
     ])
     .factory('ShitaiesService', ShitaiesService);
 
-  ShitaiesService.$inject = ['$firebaseArray', 'ProfilesService', 'toaster'];
+  ShitaiesService.$inject = ['$firebaseArray', 'ImatomoValue', 'ProfilesService', 'toaster'];
 
   var ref = new Firebase('https://resplendent-inferno-2076.firebaseio.com/shitaies');
 
@@ -22,7 +22,7 @@
    * @class ShitaiesService
    * @constructor
    */
-  function ShitaiesService($firebaseArray, ProfilesService, toaster) {
+  function ShitaiesService($firebaseArray, ImatomoValue, ProfilesService, toaster) {
 
     var shitaiesArray = $firebaseArray(ref);
 
@@ -64,13 +64,12 @@
       approval: function(id) {
         // 更新
         shitaiesArray.$loaded().then(function(x) {
-          var profile =  ProfilesService.getStorageProfile();
           var s = shitaiesArray.$getRecord(id);
           if (!s.approvals) {
             s.approvals = [];
           }
-          s.approvals.push({userid : profile.userid});
-          s.lastApprovalUserid = profile.userid;
+          s.approvals.push({userid : ImatomoValue.profile.id});
+          s.lastApprovalUserid = ImatomoValue.profile.id;
           shitaiesArray.$save(s);
         });
       },
@@ -81,10 +80,9 @@
       cancel: function(id, aftfnc) {
         // 更新
         shitaiesArray.$loaded().then(function(x) {
-          var profile =  ProfilesService.getStorageProfile();
           var s = shitaiesArray.$getRecord(id);
           var newApprovals = s.approvals.filter(function(a) {
-            return a.userid !== profile.userid;
+            return a.userid !== ImatomoValue.profile.id;
           });
           s.approvals = newApprovals;
           s.lastApprovalUserid = '';
@@ -110,7 +108,6 @@
         return;
       }
 
-      var profile =  ProfilesService.getStorageProfile();
       var shitai = shitaiesArray.$getRecord(event.key);
 
       // 自分の $add 'child_changed' だったら何もしない
@@ -129,16 +126,23 @@
       }
 
       // 自分以外が登録したものなら無視する
-      if (shitai.userid !== profile.userid) {
-        console.log(shitai.userid + '!==' + profile.userid);
+      if (shitai.userid !== ImatomoValue.profile.id) {
+        console.log(shitai.userid + '!==' + ImatomoValue.profile.id);
         console.log('自分以外が登録したものなら無視する');
         return;
       }
 
       // 参加者を取得
       var newMemberId = shitai.lastApprovalUserid;
-      var newMember = ProfilesService.getProfiles().$getRecord(newMemberId);
-      toaster.pop('success', '仲間があらわれた！', newMember.username + ' さんがあなたに賛同しました。');
+      var profiles = ProfilesService.getProfiles();
+      profiles.$loaded().then(function(x) {
+        for (var i = 0; i < profiles.length; i++) {
+          if (profiles[i].userid === newMemberId) {
+            toaster.pop('success', '仲間があらわれた！', profiles[i].username + ' さんがあなたに賛同しました。');
+            break;
+          }
+        }
+      });
 
       console.log('仲間があらわれた！！！！！！！！！！！！！！！');
 

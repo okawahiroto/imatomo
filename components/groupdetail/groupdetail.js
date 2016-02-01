@@ -13,7 +13,7 @@
     ])
     .controller('GroupdetailController', GroupdetailController);
 
-  GroupdetailController.$inject = ['$routeParams', '$location', 'ProfilesService', 'GroupsService'];
+  GroupdetailController.$inject = ['$routeParams', '$location', 'ImatomoValue', 'ProfilesService', 'GroupsService'];
 
   /**
    * GroupdetailController
@@ -21,13 +21,13 @@
    * @class GroupdetailController
    * @constructor
    */
-  function GroupdetailController($routeParams, $location, ProfilesService, GroupsService) {
+  function GroupdetailController($routeParams, $location, ImatomoValue, ProfilesService, GroupsService) {
     console.log('GroupdetailController Constructor');
     this.id = $routeParams.id;
     this.$location = $location;
+    this.ImatomoValue = ImatomoValue;
     this.ProfilesService = ProfilesService;
     this.GroupsService = GroupsService;
-    this.profile = ProfilesService.getStorageProfile();
   }
 
   /**
@@ -42,13 +42,15 @@
 
     // プロファイル一覧
     var profiles = vm.ProfilesService.getProfiles();
-
+console.log(1);
     // グループ取得
     vm.GroupsService.getGroup(vm.id, function(group) {
       profiles.$loaded().then(function (x) {
-        var creator = profiles.$getRecord(group.createuserid);
-        if (creator) {
-          vm.createusername = creator.username;
+        for (var i = 0; i < profiles.length; i++) {
+          if (profiles[i].userid === group.createuserid) {
+            vm.createusername = profiles[i].username;
+            break;
+          }
         }
       });
       vm.group = group;
@@ -83,7 +85,7 @@
   GroupdetailController.prototype.withdrawal = function() {
     console.log('GroupdetailController withdrawal Method');
     // サービス実行
-    vm.GroupsService.removeMember(vm.group.$id, vm.profile.userid, function() {
+    vm.GroupsService.removeMember(vm.group.$id, vm.ImatomoValue.profile.id, function() {
       vm.$location.path('group');
     });
   };
@@ -93,18 +95,18 @@
    */
   GroupdetailController.prototype.isAbleApply = function() {
 
-    if (!vm.group || !vm.profile) {
+    if (!vm.group) {
       return false;
     }
 
     // 自分のグループなら非表示
-    if (vm.group.createuserid === vm.profile.userid) {
+    if (vm.group.createuserid === vm.ImatomoValue.profile.id) {
       return false;
     }
 
     // 既に参加済なら非表示
     for (var i = 0; i < vm.group.members.length; i++) {
-      if (vm.group.members[i].userid === vm.profile.userid) {
+      if (vm.group.members[i].userid === vm.ImatomoValue.profile.id) {
         return false;
       }
     }
@@ -117,12 +119,12 @@
    */
   GroupdetailController.prototype.isAbleDissolution = function() {
 
-    if (!vm.group || !vm.profile) {
+    if (!vm.group) {
       return false;
     }
 
     // 既に参加済なら表示
-    return (vm.group.createuserid === vm.profile.userid);
+    return (vm.group.createuserid === vm.ImatomoValue.profile.id);
   };
 
   /**
@@ -130,13 +132,13 @@
    */
   GroupdetailController.prototype.isAbleWithdrawal = function() {
 
-    if (!vm.group || !vm.profile) {
+    if (!vm.group) {
       return false;
     }
 
     // 既に参加済なら表示
     for (var i = 0; i < vm.group.members.length; i++) {
-      if (vm.group.members[i].userid === vm.profile.userid) {
+      if (vm.group.members[i].userid === vm.ImatomoValue.profile.id) {
         return true;
       }
     }

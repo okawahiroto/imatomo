@@ -25,21 +25,21 @@
 
     var profilesService = {
 
-      /*
-       * LocalStorage検索
-       */
-      getStorageProfile: function() {
-
-        // ローカルストレージからユーザ情報を取得
-        var localStorage = window.localStorage;
-        var user = localStorage.getItem('profile');
-
-        // なければ undefined
-        if (!user) {
-          return undefined;
-        }
-        return JSON.parse(user);
-      },
+      // /*
+      //  * LocalStorage検索
+      //  */
+      // getStorageProfile: function() {
+      //
+      //   // ローカルストレージからユーザ情報を取得
+      //   var localStorage = window.localStorage;
+      //   var user = localStorage.getItem('profile');
+      //
+      //   // なければ undefined
+      //   if (!user) {
+      //     return undefined;
+      //   }
+      //   return JSON.parse(user);
+      // },
 
       /*
        * 検索
@@ -48,44 +48,51 @@
         return profileArray;
       },
 
-      /*
-       * 登録
-       */
-      addProfile: function(profile, aftfunc) {
-
-        // 登録
-        profileArray.$add(profile).then(function(ref) {
-          // 採番されたID
-          var id = ref.key();
-          // ローカルストレージに登録
-          profile.userid = id;
-          window.localStorage.setItem('profile', JSON.stringify(profile));
-          if (aftfunc) {
-            aftfunc(ref);
-          }
-        });
-      },
+      // /*
+      //  * 登録
+      //  */
+      // addProfile: function(profile, aftfunc) {
+      //
+      //   // 登録
+      //   profileArray.$add(profile).then(function(ref) {
+      //     // 採番されたID
+      //     var id = ref.key();
+      //     // ローカルストレージに登録
+      //     profile.userid = id;
+      //     window.localStorage.setItem('profile', JSON.stringify(profile));
+      //     if (aftfunc) {
+      //       aftfunc(ref);
+      //     }
+      //   });
+      // },
 
       /*
        * 更新
        */
       modProfile: function(profile, aftfunc) {
 
-        // ユーザID
-        var userid = this.getStorageProfile().userid;
-
-        // 更新
         profileArray.$loaded().then(function(x) {
-          var p = profileArray.$getRecord(userid);
-          p.username = profile.username;
-          profileArray.$save(p);
-          // ローカルストレージを更新
-          profile.userid = userid;
-          window.localStorage.setItem('profile', JSON.stringify(profile));
-
-          if (aftfunc) {
-            aftfunc(profile);
+          for (var i = 0; i < profileArray.length; i++) {
+            var p = profileArray[i];
+            if (p.userid === profile.id) {
+              p.username = profile.name;
+              profileArray.$save(p);
+              if (aftfunc) {
+                aftfunc(p);
+              }
+              return;
+            }
           }
+          // 登録
+          var addProfile = {
+            userid : profile.id,
+            username : profile.name
+          };
+          profileArray.$add(addProfile).then(function(ref) {
+            if (aftfunc) {
+              aftfunc(ref);
+            }
+          });
         });
       }
     };

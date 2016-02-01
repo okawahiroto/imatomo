@@ -9,12 +9,11 @@
   angular
     .module('imatomo.components.shitai', [
       'imatomo.service.shitaies',
-      'imatomo.service.profiles',
       'imatomo.service.groups'
     ])
     .controller('ShitaiController', ShitaiController);
 
-  ShitaiController.$inject = ['$location', 'ShitaiesService', 'ProfilesService', 'GroupsService'];
+  ShitaiController.$inject = ['ImatomoValue', '$location', 'ShitaiesService', 'GroupsService'];
 
   /**
    * ShitaiController
@@ -22,13 +21,12 @@
    * @class ShitaiController
    * @constructor
    */
-  function ShitaiController($location, ShitaiesService, ProfilesService, GroupsService) {
+  function ShitaiController(ImatomoValue, $location, ShitaiesService, GroupsService) {
     console.log('ShitaiController Constructor');
     this.$location = $location;
+    this.ImatomoValue = ImatomoValue;
     this.ShitaiesService = ShitaiesService;
-    this.ProfilesService = ProfilesService;
     this.GroupsService = GroupsService;
-    this.profile = ProfilesService.getStorageProfile();
   }
 
   /**
@@ -56,7 +54,7 @@
     groupList.$loaded().then(function (x) {
       for (var i = 0; i < groupList.length; i++) {
         for (var j = 0; j < groupList[i].members.length; j++) {
-          if (groupList[i].members[j].userid === vm.profile.userid) {
+          if (groupList[i].members[j].userid === vm.ImatomoValue.profile.id) {
             var wg = {
               groupid: groupList[i].$id,
               groupname: groupList[i].groupname
@@ -80,16 +78,6 @@
    */
   ShitaiController.prototype.register = function() {
     console.log('ShitaiController register Method');
-
-    var profile = vm.ProfilesService.getStorageProfile();
-
-    // なければ終了
-    if (!profile) {
-      vm.status = 'dengire';
-      vm.message = 'ユーザ登録を行ってください。';
-      return;
-    }
-
     // 期限
     var limitDate = vm.date;
     limitDate.setHours(new Date(vm.time).getHours(), new Date(vm.time).getMinutes(), 59, 0);
@@ -100,14 +88,12 @@
     }
 
     var shitai = {
-      userid : profile.userid,
-      //username : profile.username,
+      userid : vm.ImatomoValue.profile.id,
       title: vm.title,
       time: limitDate.getTime(),
       comment : (vm.comment === undefined ? '' : vm.comment),
       place: (vm.place === undefined ? '' : vm.place),
       group: (vm.groupList.groupid === undefined ? '' : vm.groupList.groupid),
-      createtimestamp : Firebase.ServerValue.TIMESTAMP
     };
 
     // Firebaseに追加
