@@ -46,7 +46,7 @@
 
     // 「みんな」作成
     var allgroup = {
-      $id: '',
+      groupid: '',
       groupname: 'みんな'
     };
     newgroupList.push(allgroup);
@@ -58,7 +58,7 @@
         for (var j = 0; j < groupList[i].members.length; j++) {
           if (groupList[i].members[j].userid === vm.profile.userid) {
             var wg = {
-              $id: groupList[i].$id,
+              groupid: groupList[i].$id,
               groupname: groupList[i].groupname
             };
             newgroupList.push(wg);
@@ -66,7 +66,7 @@
         }
       }
       vm.groupList = newgroupList;
-      vm.groupList.$id = vm.groupList[0].$id;
+      vm.groupList.groupid = vm.groupList[0].groupid;
     });
 
     // 期限に関する設定
