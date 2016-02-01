@@ -1,8 +1,6 @@
-<div>shitaidetail.html</div>
-
 <form class="form-horizontal">
 
-  <h1 class="text-center"> {{shitaidetail.title}} <small>したい</small></h1>
+  <h1 class="text-center">{{shitaidetail.title}}</h1>
 
   <div class="form-group">
     <label class="col-sm-2 control-label">だれが：</label>
@@ -31,11 +29,12 @@
     </div>
     <label class="col-sm-2 control-label">どんな感じで：</label>
     <div class="col-sm-10">
-      <div class="panel panel-default">
+      <!--<div class="panel panel-default">
         <div class="panel-body">
           {{shitaidetail.comment}}
         </div>
-      </div>
+      </div>-->
+      <textarea class="form-control" rows="5" style="background-color:transparent;" tabindex="-1" readonly>{{shitaidetail.comment}}</textarea>
     </div>
   </div>
   <div class="form-group">
