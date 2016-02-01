@@ -106,7 +106,7 @@
       time: limitDate.getTime(),
       comment : (vm.comment === undefined ? '' : vm.comment),
       place: (vm.place === undefined ? '' : vm.place),
-      group: (vm.groupList.$id === undefined ? '' : vm.groupList.$id),
+      group: (vm.groupList.groupid === undefined ? '' : vm.groupList.groupid),
       createtimestamp : Firebase.ServerValue.TIMESTAMP
     };
 
