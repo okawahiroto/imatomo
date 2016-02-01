@@ -30,8 +30,8 @@ http://fujioka-tomonobu.github.io/tasklist/
 
 
 プロファイル　項目定義（ここはソーシャル認証に持っていくかな...）
-* $id         ：ID
-* usernane    ：利用者名
+* userid      ：Google+認証から取得した値が設定されている
+* usernane    ：同上
 
 
 公言　項目定義
