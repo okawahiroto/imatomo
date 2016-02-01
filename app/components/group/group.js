@@ -8,12 +8,11 @@
 
   angular
     .module('imatomo.components.group', [
-      'imatomo.service.profiles',
       'imatomo.service.groups'
     ])
     .controller('GroupController', GroupController);
 
-  GroupController.$inject = ['$location', 'ProfilesService', 'GroupsService'];
+  GroupController.$inject = ['$location', 'ImatomoValue', 'GroupsService'];
 
   /**
    * GroupController
@@ -21,12 +20,11 @@
    * @class GroupController
    * @constructor
    */
-  function GroupController($location, ProfilesService, GroupsService) {
+  function GroupController($location, ImatomoValue, GroupsService) {
     console.log('GroupController Constructor');
     this.$location = $location;
-    this.ProfilesService = ProfilesService;
+    this.ImatomoValue = ImatomoValue;
     this.GroupsService = GroupsService;
-    this.profile = ProfilesService.getStorageProfile();
   }
 
   /**
@@ -48,17 +46,10 @@
    */
   GroupController.prototype.register = function() {
 
-    // なければ終了
-    if (!vm.profile) {
-      vm.status = 'dengire';
-      vm.message = 'ユーザ登録を行ってください。';
-      return;
-    }
-
     var group = {
-      createuserid : vm.profile.userid,
+      createuserid : vm.ImatomoValue.profile.id,
       groupname: vm.groupname,
-      members : [{userid : vm.profile.userid, username : vm.profile.username}]
+      members : [{userid : vm.ImatomoValue.profile.id, username : vm.ImatomoValue.profile.name}]
     };
 
     // Firebaseに追加

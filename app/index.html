@@ -31,10 +31,28 @@
     <div class="container">
 
       <toaster-container></toaster-container>
-      
-      <div ng-viewport></div>
 
-      <div ng-include="'components/footer/footer.html'"></div>
+      <div ng-if="!imatomo.ImatomoValue.profile">
+          <google-plus-signin clientid="117541789611-5s2lsdt7a16h1t5uc1sf4keu2b3c46s6.apps.googleusercontent.com" language="ja"></google-plus-signin>
+
+          <script type="text/ng-template" id="myModalContent.html">
+              <div class="modal-header">
+                  <h3 class="modal-title">認証エラー</h3>
+              </div>
+              <div class="modal-body">
+                  いまともはgoogle＋アカウントが必要です。
+                  https://plus.google.com/getstarted
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-primary" type="button" ng-click="$close()">OK</button>
+              </div>
+          </script>
+      </div>
+      <div ng-if="imatomo.ImatomoValue.profile">
+        <div ng-viewport></div>
+
+        <div ng-include="'components/footer/footer.html'"></div>
+      </div>
 
     </div>
 
@@ -48,6 +66,9 @@
     <script src="bower_components/angularfire/dist/angularfire.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angularjs-toaster/toaster.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-i18n/angular-locale_ja-jp.js"></script>
+    <script src="bower_components/angular-directive.g-signin/google-plus-signin.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -90,8 +111,9 @@
         <script src="components/shitai/shitai.js"></script>
         <script src="components/shitaidetail/shitaidetail.js"></script>
         <script src="components/shitailist/shitailist.js"></script>
-        <script src="directives/username/username.js"></script>
+        <script src="directives/userid/userid.js"></script>
         <script src="scripts/config.js"></script>
+        <script src="scripts/value.js"></script>
         <script src="service/groups/groups.js"></script>
         <script src="service/gruntfiles/gruntfiles.js"></script>
         <script src="service/profiles/profiles.js"></script>

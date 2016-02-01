@@ -9,13 +9,14 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="">いまとも(仮)</a>
+      <img ng-show="imatomo.ImatomoValue.profile" ng-src="{{imatomo.ImatomoValue.profile.picture}}" width="30px" style="padding-top : 10px;"/>
     </div>
     <div class="collapse navbar-collapse" id="app-nav">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" ng-show="imatomo.ImatomoValue.profile">
         <li><a ng-link="shitailist">〇〇したい人たち</a></li>
         <li><a ng-link="shitai" >〇〇したい</a></li>
         <li><a ng-link="group" >グループ</a></li>
-        <li><a ng-link="profile" >プロファイル</a></li>
+        <!--<li><a ng-link="profile" >プロファイル</a></li>-->
       </ul>
       <!--
       <ul class="nav navbar-nav navbar-right">
@@ -23,6 +24,7 @@
       </ul>
     -->
     </div>
+
   </div>
 </div>
 

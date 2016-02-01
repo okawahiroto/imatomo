@@ -24,6 +24,9 @@ module.exports = function(config) {
       'bower_components/angularfire/dist/angularfire.js',
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angularjs-toaster/toaster.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/angular-i18n/angular-locale_ja-jp.js',
+      'bower_components/angular-directive.g-signin/google-plus-signin.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       // injector:js
@@ -33,8 +36,9 @@ module.exports = function(config) {
       'app/components/shitai/shitai.js',
       'app/components/shitaidetail/shitaidetail.js',
       'app/components/shitailist/shitailist.js',
-      'app/directives/username/username.js',
+      'app/directives/userid/userid.js',
       'app/scripts/config.js',
+      'app/scripts/value.js',
       'app/service/groups/groups.js',
       'app/service/gruntfiles/gruntfiles.js',
       'app/service/profiles/profiles.js',

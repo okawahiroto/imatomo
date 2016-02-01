@@ -12,19 +12,17 @@
     </tr>
 </table>
 
-<div ng-show="group.profile !== undefined">
-  <alert type="{{group.status}}" ng-show="!!group.message" close="group.closeAlert()">{{group.message}}</alert>
-  <form class="form-horizontal" name="groupregister" ng-submit="group.register()" novalidate>
-    <div class="form-group">
-      <label for="groupname" class="col-sm-2 control-label">グループ名</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="groupname" placeholder="○○○部" ng-model="group.groupname" required>
-      </div>
+<alert type="{{group.status}}" ng-show="!!group.message" close="group.closeAlert()">{{group.message}}</alert>
+<form class="form-horizontal" name="groupregister" ng-submit="group.register()" novalidate>
+  <div class="form-group">
+    <label for="groupname" class="col-sm-2 control-label">グループ名</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="groupname" placeholder="○○○部" ng-model="group.groupname" required>
     </div>
-    <div class="form-group">
-      <div class="col-sm-10">
-        <input class="btn btn-primary" type="submit" value="作成する" ng-disabled="!groupregister.$valid">
-      </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input class="btn btn-primary" type="submit" value="作成する" ng-disabled="!groupregister.$valid">
     </div>
-  </form>
-</div>
+  </div>
+</form>

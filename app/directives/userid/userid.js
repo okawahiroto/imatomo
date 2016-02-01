@@ -16,9 +16,7 @@
 
   function UseridDirective(ProfilesService) {
     return function(scope, element, attrs) {
-      var profiles = ProfilesService.getProfiles();
-      ProfilesService.getProfiles().$loaded().then(function (x) {
-        var profile = profiles.$getRecord(attrs.userid);
+      ProfilesService.getProfile(attrs.userid, function(profile) {
         if (profile) {
           element.append(profile.username);
         }
