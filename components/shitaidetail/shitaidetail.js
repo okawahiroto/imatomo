@@ -132,10 +132,6 @@
    */
   ShitaidetailController.prototype.isApproval = function(shitai) {
 
-    if (!vm.ImatomoValue.profile) {
-      return false;
-    }
-
     // 自分が公言したものなら非表示
     if (shitai.userid === vm.ImatomoValue.profile.id) {
       return false;
@@ -159,10 +155,6 @@
    * キャンセルボタンを表示できるか検証する
    */
   ShitaidetailController.prototype.isCancel = function(shitai) {
-
-    if (!vm.ImatomoValue.profile) {
-      return false;
-    }
 
     // 自分が公言したものなら非表示
     if (shitai.userid === vm.ImatomoValue.profile.id) {

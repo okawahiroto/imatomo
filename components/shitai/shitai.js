@@ -54,6 +54,7 @@
     groupList.$loaded().then(function (x) {
       for (var i = 0; i < groupList.length; i++) {
         for (var j = 0; j < groupList[i].members.length; j++) {
+          console.log('get ImatomoValue.profile');
           if (groupList[i].members[j].userid === vm.ImatomoValue.profile.id) {
             var wg = {
               groupid: groupList[i].$id,
@@ -91,9 +92,9 @@
       userid : vm.ImatomoValue.profile.id,
       title: vm.title,
       time: limitDate.getTime(),
-      comment : (vm.comment === undefined ? '' : vm.comment),
-      place: (vm.place === undefined ? '' : vm.place),
-      group: (vm.groupList.groupid === undefined ? '' : vm.groupList.groupid),
+      comment : (!vm.comment ? '' : vm.comment),
+      place: (!vm.place ? '' : vm.place),
+      group: (!vm.groupList.groupid ? '' : vm.groupList.groupid),
     };
 
     // Firebaseに追加
