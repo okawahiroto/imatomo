@@ -65,15 +65,10 @@
     vm.comment     = shitaiItem.comment;
     vm.createtimesstamp = shitaiItem.createtimesstamp;
 
-    // プロファイル一覧
-    var profiles = vm.ProfilesService.getProfiles();
-
-    // 名前解決
-    profiles.$loaded().then(function (x) {
-      for (var i = 0; i < profiles.length; i++) {
-        if (profiles[i].userid === shitaiItem.userid) {
-          vm.username = profiles[i].username;
-        }
+    // 名称解決
+    vm.ProfilesService.getProfile(shitaiItem.userid, function(profile) {
+      if (profile) {
+        vm.username = profile.username;
       }
     });
 
@@ -168,7 +163,7 @@
     if (!vm.ImatomoValue.profile) {
       return false;
     }
-    
+
     // 自分が公言したものなら非表示
     if (shitai.userid === vm.ImatomoValue.profile.id) {
       return false;

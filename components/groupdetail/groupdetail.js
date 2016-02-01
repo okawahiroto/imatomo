@@ -40,17 +40,12 @@
     console.log('GroupdetailController activate Method');
     vm = this;
 
-    // プロファイル一覧
-    var profiles = vm.ProfilesService.getProfiles();
-console.log(1);
     // グループ取得
     vm.GroupsService.getGroup(vm.id, function(group) {
-      profiles.$loaded().then(function (x) {
-        for (var i = 0; i < profiles.length; i++) {
-          if (profiles[i].userid === group.createuserid) {
-            vm.createusername = profiles[i].username;
-            break;
-          }
+
+      vm.ProfilesService.getProfile(group.createuserid, function(profile) {
+        if (profile) {
+          vm.createusername = profile.username;
         }
       });
       vm.group = group;

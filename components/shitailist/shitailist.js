@@ -101,9 +101,6 @@
       return false;
     }
 
-    // 自分が公言したものなら非表示
-    console.log('ヴぁぅえの値 = ');
-    console.log(vm.ImatomoValue.profile);
     if (shitai.userid === vm.ImatomoValue.profile.id) {
       return false;
     }

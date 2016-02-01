@@ -48,6 +48,22 @@
         return profileArray;
       },
 
+      /*
+       * １件検索
+       */
+      getProfile: function(userid, aftfnc) {
+        profileArray.$loaded().then(function(x) {
+          for (var i = 0; i < profileArray.length; i++) {
+            if (profileArray[i].userid === userid) {
+              if (aftfnc) {
+                aftfnc(profileArray[i]);
+              }
+              break;
+            }
+          }
+        });
+      },
+
       // /*
       //  * 登録
       //  */
