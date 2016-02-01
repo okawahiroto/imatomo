@@ -40,12 +40,18 @@
     console.log('ShitailistController activate Method');
     vm = this;
 
-    // したい一覧
-    var shitaies = vm.ShitaiesService.findShitaies();
-    vm.items = shitaies;
-
     // プロファイル保持
     vm.profile = vm.ProfilesService.getStorageProfile();
+
+    // グループ一覧取得
+    var groupList = vm.GroupsService.findGroups();
+    groupList.$loaded().then(function (x) {
+      vm.groupList = groupList;
+
+      // したい一覧
+      var shitaies = vm.ShitaiesService.findShitaies();
+      vm.items = shitaies;
+    });
 
     // 期限のフィルタリング条件 (秒単位でみたらおかしいけど、、いまはもういいや)
     vm.filterDate = new Date().getTime();
@@ -162,12 +168,16 @@
       return true;
     }
 
+    // グループ一覧が存在しない場合は表示
+    if (vm.groupList !== undefined) {
+      return true;
+    }
+
     // 「グループ：自身が所属しているグループ」の公言は表示
-    var groupList = vm.GroupsService.findGroups();
-    for (var i = 0; i < groupList.length; i++) {
-      if (groupList[i].$id === data.group) {
-        for (var j = 0; j < groupList[i].members.length; j++) {
-          if (groupList[i].members[j].userid === vm.profile.userid) {
+    for (var i = 0; i < vm.groupList.length; i++) {
+      if (vm.groupList[i].$id === data.group) {
+        for (var j = 0; j < vm.groupList[i].members.length; j++) {
+          if (vm.groupList[i].members[j].userid === vm.profile.userid) {
             return true;
           }
         }
