@@ -92,9 +92,9 @@
       userid : vm.ImatomoValue.profile.id,
       title: vm.title,
       time: limitDate.getTime(),
-      comment : (vm.comment === undefined ? '' : vm.comment),
-      place: (vm.place === undefined ? '' : vm.place),
-      group: (vm.groupList.groupid === undefined ? '' : vm.groupList.groupid),
+      comment : (!vm.comment ? '' : vm.comment),
+      place: (!vm.place ? '' : vm.place),
+      group: (!vm.groupList.groupid ? '' : vm.groupList.groupid),
     };
 
     // Firebaseに追加

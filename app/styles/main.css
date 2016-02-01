@@ -88,14 +88,17 @@ body {
   }
 }
 
-@media screen and (max-width: 480px) {
-  table {
-    font-size: 80%;
-  }
-  /*td {
-  display: list-item;
-  list-style: none;
-  text-align: center;
-  background-color: white;
-  }*/
+@media screen and (max-width: 600px) {
+	table.shitaies tr {
+		border-bottom:medium solid #babaee;
+	}
+	table.shitaies tr td {
+		display:list-item;
+		text-align:left;
+		list-style:none;
+		border-style:none;
+	}
+  table.shitaies tr td button.right {
+		float : right;
+	}
 }

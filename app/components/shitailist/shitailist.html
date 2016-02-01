@@ -3,47 +3,34 @@
     <a data-toggle="tab"  ng-click="shitailist.useridFilter = undefined">全部</a>
   </li>
   <li>
-    <a data-toggle="tab" ng-click="shitailist.useridFilter = {userid : shitailist.profile.userid}">自分</a>
+    <a data-toggle="tab" ng-click="shitailist.useridFilter = {userid : shitailist.ImatomoValue.profile.id}">自分</a>
   </li>
   <li>
     <a data-toggle="tab" ng-click="shitailist.useridFilter = shitailist.searchMyApprovals()">賛同している</a>
   </li>
 </ul>
 
-<table class="table table-striped">
-  <th>いつ</th>
-  <th>誰が</th>
-  <th>したい</th>
-  <th>詳細</th>
-  <th>参加</th>
-  <th>辞退</th>
-  <th>削除</th>
+<table class="table table-striped shitaies">
     <tr ng-repeat="data in shitailist.items | filter: shitailist.useridFilter | orderBy: 'time'" ng-if="data.time >= shitailist.filterDate" ng-show="shitailist.searchMember(data)">
-      <td>{{data.time | date : 'M/dd (EEE) HH:mm'}}</td>
-      <!--<td>{{data.createtimestamp | date : 'M/dd HH:mm'}}</td>-->
       <td userid={{data.userid}}></td>
-      <!-- <td>{{data.name}}</td> -->
+      <td>{{data.time | date : 'M/dd (EEE) HH:mm'}}</td>
+      <!--<td>{{data.place}}</td>-->
       <td>
-        {{data.title}}<span class="badge">{{data.approvals ? data.approvals.length : 0 }}</span>
+        <span class="badge">{{data.approvals ? data.approvals.length : 0 }}</span>
+        {{data.title}}
       </td>
       <td>
-        <button type="button" class="btn btn-info" ng-click="shitailist.moveDetail(data.$id)">
-          <i class="glyphicon glyphicon-list-alt"></i>
+        <button type="button" class="btn btn-info" ng-click="shitailist.moveDetail(data.$id)" style="margin-right:30px;" uib-tooltip="詳細へ">
+          <i class="glyphicon glyphicon-info-sign"></i>
         </button>
-      </td>
-      <td>
-        <button type="button" class="btn btn-primary" ng-click="shitailist.approval(data.$id)" ng-show="shitailist.isApproval(data)">
-          <i class="glyphicon glyphicon-ok-sign"></i>
+        <button type="button" class="btn btn-primary right" ng-click="shitailist.approval(data.$id)" ng-show="shitailist.isApproval(data)" uib-tooltip="賛同する">
+          <i class="glyphicon glyphicon-thumbs-up"></i>
         </button>
-      </td>
-      <td>
-        <button type="button" class="btn btn-warning" ng-click="shitailist.cancel(data.$id)" ng-show="shitailist.isCancel(data)">
-          <i class="glyphicon glyphicon-remove-sign"></i>
+        <button type="button" class="btn btn-warning right" ng-click="shitailist.cancel(data.$id)" ng-show="shitailist.isCancel(data)" uib-tooltip="賛同を取り止める">
+          <i class="glyphicon glyphicon-minus"></i>
         </button>
-      </td>
-      <td>
-        <button type="button" class="btn btn-danger" ng-click="shitailist.items.$remove(data)" ng-show="shitailist.ImatomoValue.profile.id == data.userid">
-          <i class="glyphicon glyphicon-remove-sign"></i>
+        <button type="button" class="btn btn-danger right" ng-click="shitailist.items.$remove(data)" ng-show="shitailist.ImatomoValue.profile.id == data.userid" uib-tooltip="削除する">
+          <i class="glyphicon glyphicon-trash"></i>
         </button>
       </td>
     </tr>
