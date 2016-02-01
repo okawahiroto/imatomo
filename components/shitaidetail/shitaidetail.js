@@ -10,10 +10,11 @@
     .module('imatomo.components.shitaidetail', [
       'imatomo.service.shitaies',
       'imatomo.service.profiles',
+      'imatomo.service.groups'
     ])
     .controller('ShitaidetailController', ShitaidetailController);
 
-  ShitaidetailController.$inject = ['$location', '$routeParams', 'ShitaiesService', 'ProfilesService'];
+  ShitaidetailController.$inject = ['$location', '$routeParams', 'ShitaiesService', 'ProfilesService', 'GroupsService'];
 
   /**
    * ShitaidetailController
@@ -21,13 +22,14 @@
    * @class ShitaidetailController
    * @constructor
    */
-  function ShitaidetailController($location, $routeParams, ShitaiesService, ProfilesService) {
+  function ShitaidetailController($location, $routeParams, ShitaiesService, ProfilesService, GroupsService) {
     console.log('ShitaidetailController Constructor');
     this.$location = $location;
     this.id = $routeParams.id;
     this.ShitaiesService = ShitaiesService;
     this.ProfilesService = ProfilesService;
     this.profile = ProfilesService.getStorageProfile();
+    this.GroupsService = GroupsService;
   }
 
   /**
@@ -72,6 +74,19 @@
       if (profile) {
         vm.username = profile.username;
       }
+    });
+
+    // グループ名取得
+    var groupname = 'みんな';
+    var groupList = vm.GroupsService.findGroups();
+    groupList.$loaded().then(function (x) {
+      for (var i = 0; i < groupList.length; i++) {
+        if (groupList[i].$id === shitaiItem.group) {
+          groupname = groupList[i].groupname;
+          break;
+        }
+      }
+      vm.group = groupname;
     });
 
     // 賛同者取得
