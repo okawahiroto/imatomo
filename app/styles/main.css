@@ -92,7 +92,7 @@ body {
 	table.shitaies tr {
 		border-bottom:medium solid #babaee;
 	}
-	table.shitaies tr td {
+	table.shitaies tr td.inline {
 		display:list-item;
 		text-align:left;
 		list-style:none;
