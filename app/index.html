@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <!-- injector:base-start -->
-    <base href="/imatomo/">
+    <base href="/">
     <!-- injector:base-end -->
 
     <title>imatomo</title>
@@ -40,7 +40,7 @@
                   <h3 class="modal-title">認証エラー</h3>
               </div>
               <div class="modal-body">
-                  いまともはgoogle＋アカウントが必要です。
+                  google＋アカウントが必要です。
                   https://plus.google.com/getstarted
               </div>
               <div class="modal-footer">
@@ -48,7 +48,9 @@
               </div>
           </script>
       </div>
+
       <div ng-if="imatomo.ImatomoValue.profile">
+
         <div ng-viewport></div>
 
         <div ng-include="'components/footer/footer.html'"></div>
@@ -112,6 +114,7 @@
         <script src="components/shitaidetail/shitaidetail.js"></script>
         <script src="components/shitailist/shitailist.js"></script>
         <script src="directives/userid/userid.js"></script>
+        <script src="directives/userpicture/userpicture.js"></script>
         <script src="scripts/config.js"></script>
         <script src="scripts/value.js"></script>
         <script src="service/groups/groups.js"></script>
