@@ -69,6 +69,7 @@
     vm.ProfilesService.getProfile(shitaiItem.userid, function(profile) {
       if (profile) {
         vm.username = profile.username;
+        vm.userpicture = profile.picture;
       }
     });
 
