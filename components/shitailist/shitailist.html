@@ -12,15 +12,16 @@
 
 <table class="table table-striped shitaies">
     <tr ng-repeat="data in shitailist.items | filter: shitailist.useridFilter | orderBy: 'time'" ng-if="data.time >= shitailist.filterDate" ng-show="shitailist.searchMember(data)">
-      <td userid={{data.userid}}></td>
-      <td>{{data.time | date : 'M/dd (EEE) HH:mm'}}</td>
+      <td userpicture={{data.userid}}></td>
+      <td class="inline" userid={{data.userid}}></td>
+      <td class="inline">{{data.time | date : 'M/dd (EEE) HH:mm'}}</td>
       <!--<td>{{data.place}}</td>-->
-      <td>
+      <td class="inline">
         <span class="badge">{{data.approvals ? data.approvals.length : 0 }}</span>
         {{data.title}}
       </td>
-      <td>
-        <button type="button" class="btn btn-info" ng-click="shitailist.moveDetail(data.$id)" style="margin-right:30px;" uib-tooltip="詳細へ">
+      <td nowrap class="inline">
+        <button type="button" class="btn btn-info" ng-click="shitailist.moveDetail(data.$id)" style="margin-right:20px;" uib-tooltip="詳細へ">
           <i class="glyphicon glyphicon-info-sign"></i>
         </button>
         <button type="button" class="btn btn-primary right" ng-click="shitailist.approval(data.$id)" ng-show="shitailist.isApproval(data)" uib-tooltip="賛同する">

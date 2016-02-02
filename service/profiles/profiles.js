@@ -92,6 +92,7 @@
             var p = profileArray[i];
             if (p.userid === profile.id) {
               p.username = profile.name;
+              p.picture = profile.picture;
               profileArray.$save(p);
               if (aftfunc) {
                 aftfunc(p);
@@ -102,7 +103,8 @@
           // 登録
           var addProfile = {
             userid : profile.id,
-            username : profile.name
+            username : profile.name,
+            picture : profile.picture
           };
           profileArray.$add(addProfile).then(function(ref) {
             if (aftfunc) {
