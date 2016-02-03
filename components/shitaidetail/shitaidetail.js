@@ -69,6 +69,7 @@
     vm.ProfilesService.getProfile(shitaiItem.userid, function(profile) {
       if (profile) {
         vm.username = profile.username;
+        vm.userpicture = profile.picture;
       }
     });
 
@@ -106,7 +107,7 @@
     }
 
     // 一覧画面へ
-    vm.$location.path('/shitailist/');
+    vm.$location.path('/shitailist');
   };
 
   /**

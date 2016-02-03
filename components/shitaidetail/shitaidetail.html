@@ -2,6 +2,12 @@
 
   <h1 class="text-center">{{shitaidetail.title}}</h1>
 
+  <div ng-if="shitaidetail.userpicture" class="text-center">
+    <img ng-src="{{shitaidetail.userpicture}}" width="200"/>
+  </div>
+
+  <hr>
+
   <div class="form-group">
     <label class="col-sm-2 control-label">だれが：</label>
     <div class="col-sm-10">
@@ -47,7 +53,7 @@
     <div class="col-sm-10">
       <ul class="list-group">
         <li class="list-group-item" ng-repeat="data in shitaidetail.approvals" >
-          <div userid={{data.userid}}></div>
+          <div userpicture={{data.userid}} userid={{data.userid}}></div>
         </li>
       </ul>
     </div>
