@@ -107,7 +107,7 @@
     }
 
     // 一覧画面へ
-    vm.$location.path('/shitailist/');
+    vm.$location.path('/shitailist');
   };
 
   /**
