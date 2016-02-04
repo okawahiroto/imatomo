@@ -49,7 +49,8 @@
    * @constructor
    */
   function AppController ($scope, $resource, $uibModal, ImatomoValue, ProfilesService) {
-    this.ImatomoValue = ImatomoValue;
+    vm = this;
+    vm.ImatomoValue = ImatomoValue;
     $scope.$on('event:google-plus-signin-success', function (event, authResult) {
       var resouece = $resource('https://www.googleapis.com/oauth2/v2/userinfo?alt=json&access_token=' + authResult.access_token, {});
       var userinfomation = resouece.get().$promise;
@@ -78,5 +79,22 @@
     });
 
   }
+
+  /*
+   * ぴんぽーん の設定
+   */
+  AppController.prototype.setCallbell = function() {
+    var callbell = document.getElementById('pushAudio');
+    callbell.load();
+    vm.ImatomoValue.callbell = (vm.callbell === 1);
+  };
+
+  /**
+   * Angular ViewModel
+   *
+   * @property vm
+   * @type {Object}
+   */
+  var vm;
 
 })();

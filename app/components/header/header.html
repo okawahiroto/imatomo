@@ -9,7 +9,12 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="">いまとも(仮)</a>
-      <img ng-show="imatomo.ImatomoValue.profile" ng-src="{{imatomo.ImatomoValue.profile.picture}}" width="30px" style="padding-top : 10px;"/>
+
+      <img ng-show="imatomo.ImatomoValue.profile" ng-src="{{imatomo.ImatomoValue.profile.picture}}" width="30px" style="margin-top:10px;"/>
+      <button type="button" class="{{imatomo.callbell == '1' ? 'btn btn-success' : 'btn btn-warning'}}" ng-model="imatomo.callbell" ng-show="imatomo.ImatomoValue.profile" style="margin-top:10px;"
+        uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="imatomo.setCallbell()">
+        <i class="{{imatomo.callbell == '1' ? 'glyphicon glyphicon-volume-up' : 'glyphicon glyphicon-volume-off'}}"></i>
+      </button>
     </div>
     <div class="collapse navbar-collapse" id="app-nav">
       <ul class="nav navbar-nav" ng-show="imatomo.ImatomoValue.profile">

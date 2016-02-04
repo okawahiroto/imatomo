@@ -9,6 +9,7 @@
   angular
     .module('imatomo.value', [])
     .value('ImatomoValue', {
-      profile: undefined
+      profile: undefined,
+      callbell: false
     });
 })();
