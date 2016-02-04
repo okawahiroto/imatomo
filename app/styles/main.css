@@ -9,6 +9,7 @@
 body {
   padding-top: 70px;
   padding-bottom: 20px;
+  font-family: "メイリオ", Meiryo, Osaka, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "ＭＳ Ｐゴシック", "MS P Gothic", sans-serif;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -90,6 +91,7 @@ body {
 
 @media screen and (max-width: 600px) {
 	table.shitaies tr {
+    border-right:medium solid #babaee;
 		border-bottom:medium solid #babaee;
 	}
 	table.shitaies tr td.inline {
@@ -101,4 +103,30 @@ body {
   table.shitaies tr td button.right {
 		float : right;
 	}
+}
+.balloon {
+  position: relative;
+  padding : 5px 10px 5px 10px;
+  color : #303030;
+  background-color: #aaffaa;
+  border-radius : 10px;
+}
+.balloon .triangle {
+  position: absolute;
+  /*
+  bottom: -10px;
+  left: 50%;
+  */
+  bottom: 20%;
+  left: -13px;
+  margin-top: -20px;
+  width: 0;
+  height: 0;
+  border-right: 15px solid #aaffaa;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.badge {
+	float : right;
 }
