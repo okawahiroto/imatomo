@@ -45,7 +45,7 @@
     }
 
     // 2秒間のバイブ → 1秒休止　→　再び2秒間
-    navigator.vibrate([2000, 1000, 2000]);
+    navigator.vibrate([200, 200, 200, 200, 200]);
 
     // グループ一覧取得
     var groupList = vm.GroupsService.findGroups();
