@@ -144,6 +144,7 @@
         }
       });
 
+      // 通知
       pushCall(ImatomoValue);
 
     });
