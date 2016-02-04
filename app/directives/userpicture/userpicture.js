@@ -16,7 +16,6 @@
 
   function UserpictureDirective(ProfilesService) {
     return function(scope, element, attrs) {
-      console.log(attrs.userpicture);
       ProfilesService.getProfile(attrs.userpicture, function(profile) {
         if (profile) {
           element.append('<img src="' + profile.picture + '" width="40" />&nbsp;');

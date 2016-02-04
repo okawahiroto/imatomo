@@ -6,12 +6,12 @@
     <a data-toggle="tab" ng-click="shitailist.useridFilter = {userid : shitailist.ImatomoValue.profile.id}">自分</a>
   </li>
   <li>
-    <a data-toggle="tab" ng-click="shitailist.useridFilter = shitailist.searchMyApprovals()">賛同している</a>
+    <a data-toggle="tab" ng-click="shitailist.useridFilter = undefined; shitailist.searchMyApprovals()">賛同している</a>
   </li>
 </ul>
 
 <table class="table table-striped shitaies">
-    <tr ng-repeat="data in shitailist.items | filter: shitailist.useridFilter | orderBy: 'time'" ng-if="data.time >= shitailist.filterDate" ng-show="shitailist.searchMember(data)">
+    <tr ng-repeat="data in shitailist.items | filter: shitailist.useridFilter | orderBy: 'time'" ng-if="data.time >= shitailist.filterDate && shitailist.searchMember(data)">
       <td userpicture={{data.userid}}></td>
       <td class="inline" userid={{data.userid}}></td>
       <td class="inline">{{data.time | date : 'M/dd (EEE) HH:mm'}}</td>

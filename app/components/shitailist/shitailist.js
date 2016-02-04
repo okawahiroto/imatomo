@@ -154,15 +154,13 @@
   };
 
   ShitailistController.prototype.searchMember = function(data) {
-    console.log('ShitailistController searchMember Method');
-
     //「グループ：みんな」の公言は表示
     if (data.group === '') {
       return true;
     }
 
     // グループ一覧が存在しない場合は表示
-    if (vm.groupList !== undefined) {
+    if (!vm.groupList) {
       return true;
     }
 
