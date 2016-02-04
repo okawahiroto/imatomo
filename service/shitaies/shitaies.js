@@ -141,7 +141,7 @@
         }
       });
 
-      pushCall();
+      pushCall(ImatomoValue);
 
     });
 
@@ -151,11 +151,16 @@
   /**
    * 通知
    */
-  function pushCall() {
+  function pushCall(ImatomoValue) {
 
     // 音ならす
-    var callbell = new Audio($('base').prop('href') + 'audio/linelike.mp3');
-    callbell.play();
+    // var callbell = new Audio($('base').prop('href') + 'audio/linelike.mp3');
+    // callbell.play();
+    console.log(ImatomoValue.callbell);
+    if (ImatomoValue.callbell) {
+      var callbell = document.getElementById('pushAudio');
+      callbell.play();
+    }
 
     // ぶるぶるさせる
     if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate) {
