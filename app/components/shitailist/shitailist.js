@@ -81,7 +81,10 @@
    */
   ShitailistController.prototype.approval = function(id) {
     console.log('ShitailistController approval Method');
-    vm.ShitaiesService.approval(id);
+    $('button').prop('disabled', 'disabled');
+    vm.ShitaiesService.approval(id, function() {
+      $('button').prop('disabled', '');
+    });
   };
 
   /**
@@ -89,7 +92,10 @@
    */
   ShitailistController.prototype.cancel = function(id) {
     console.log('ShitailistController approval Method');
-    vm.ShitaiesService.cancel(id);
+    $('button').prop('disabled', 'disabled');
+    vm.ShitaiesService.cancel(id, function() {
+      $('button').prop('disabled', '');
+    });
   };
 
   /**
