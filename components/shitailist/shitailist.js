@@ -39,14 +39,6 @@
     console.log('ShitailistController activate Method');
     vm = this;
 
-    var isVibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
-    if (isVibrate) {
-      alert('対応している!');
-    }
-
-    // 2秒間のバイブ → 1秒休止　→　再び2秒間
-    navigator.vibrate([200, 200, 200, 200, 200]);
-
     // グループ一覧取得
     var groupList = vm.GroupsService.findGroups();
     groupList.$loaded().then(function (x) {

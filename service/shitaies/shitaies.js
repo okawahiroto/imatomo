@@ -112,14 +112,12 @@
 
       // 自分の $add 'child_changed' だったら何もしない
       if (shitaiesService.selfApproval) {
-        console.log('shitaiesService.selfApproval=' + shitaiesService.selfApproval);
         console.log('自分の $add child_changed だったら何もしない');
         shitaiesService.selfApproval = false;
         return;
       }
 
       // 賛同する更新じゃなければ無視
-      console.log('shitai.lastApprovalUserid = ' + shitai.lastApprovalUserid);
       if (!shitai.lastApprovalUserid) {
         console.log('賛同する更新じゃなければ無視');
         return;
@@ -127,7 +125,6 @@
 
       // 自分以外が登録したものなら無視する
       if (shitai.userid !== ImatomoValue.profile.id) {
-        console.log(shitai.userid + '!==' + ImatomoValue.profile.id);
         console.log('自分以外が登録したものなら無視する');
         return;
       }
@@ -144,18 +141,26 @@
         }
       });
 
-      console.log('仲間があらわれた！！！！！！！！！！！！！！！');
+      pushCall();
 
-      // // 最終賛同者をすぐさまクリア
-      // shitai.lastApprovalUserid = '';
-      // shitaiesArray.$save(shitai);
-
-      // 音ならす
-      var callbell = new Audio($('base').prop('href') + 'audio/linelike.mp3');
-      callbell.play();
     });
 
     return shitaiesService;
+  }
+
+  /**
+   * 通知
+   */
+  function pushCall() {
+
+    // 音ならす
+    var callbell = new Audio($('base').prop('href') + 'audio/linelike.mp3');
+    callbell.play();
+
+    // ぶるぶるさせる
+    if (navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate) {
+      navigator.vibrate([200, 200, 200, 200, 200]);
+    }
   }
 
 })();
