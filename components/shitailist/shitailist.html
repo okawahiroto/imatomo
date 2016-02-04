@@ -1,25 +1,28 @@
 <ul class="nav nav-tabs">
   <li class="active">
-    <a data-toggle="tab"  ng-click="shitailist.useridFilter = undefined">全部</a>
+    <a data-toggle="tab"  ng-click="shitailist.flag = 0;">全部</a>
   </li>
   <li>
-    <a data-toggle="tab" ng-click="shitailist.useridFilter = {userid : shitailist.ImatomoValue.profile.id}">自分</a>
+    <a data-toggle="tab" ng-click="shitailist.flag = 1">自分</a>
   </li>
   <li>
-    <a data-toggle="tab" ng-click="shitailist.useridFilter = shitailist.searchMyApprovals()">賛同している</a>
+    <a data-toggle="tab" ng-click="shitailist.flag = 2">賛同している</a>
   </li>
 </ul>
 
 <table class="table table-striped shitaies">
-    <tr ng-repeat="data in shitailist.items | filter: shitailist.useridFilter | orderBy: 'time'" ng-if="data.time >= shitailist.filterDate" ng-show="shitailist.searchMember(data)">
-      <td userpicture={{data.userid}}></td>
+    <tr ng-repeat="data in shitailist.items | filter: shitailist.useridFilter | orderBy: 'time'" ng-if="data.time >= shitailist.filterDate && shitailist.searchMember(data) && shitailist.searchMyApprovals(data)">
+      <td width="50" userpicture={{data.userid}}></td>
+      <td class="inline">
+        <div class="balloon">
+          {{data.title}}
+          <span class="badge">{{data.approvals ? data.approvals.length : 0 }}</span>
+          <div class="triangle"></div>
+        </div>
+      </td>
       <td class="inline" userid={{data.userid}}></td>
       <td class="inline">{{data.time | date : 'M/dd (EEE) HH:mm'}}</td>
       <!--<td class="inline">{{data.place}}</td>-->
-      <td class="inline">
-        <span class="badge">{{data.approvals ? data.approvals.length : 0 }}</span>
-        {{data.title}}
-      </td>
       <td nowrap class="inline">
         <button type="button" class="btn btn-info" ng-click="shitailist.moveDetail(data.$id)" style="margin-right:20px;" uib-tooltip="詳細へ">
           <i class="glyphicon glyphicon-info-sign"></i>

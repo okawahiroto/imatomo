@@ -47,41 +47,40 @@
       // したい一覧
       var shitaies = vm.ShitaiesService.findShitaies();
       vm.items = shitaies;
+
+      // フラグ初期化
+      vm.flag = 0;
     });
 
     // 期限のフィルタリング条件 (秒単位でみたらおかしいけど、、いまはもういいや)
     vm.filterDate = new Date().getTime();
   };
 
-  ShitailistController.prototype.searchMyApprovals = function() {
-    console.log('ShitailistController searchMyApprovals Method');
-    console.log(vm.items);
-    console.log(vm.items.length);
-    var array = vm.items[0].approvals.length;
-    console.log(array);
-
-    for (var i = 0; i < vm.items.length; i++) {
-      console.log(vm.items[i].approvals);
-      for (var j = 0; j < vm.items[i].approvals.length; j++) {
-        if (vm.items[i].approvals[j].userid === vm.ImatomoValue.profile.id) {
-          console.log('b');
-          console.log(i);
-          console.log(j);
-          console.log(vm.items[i].$id);
-          console.log(vm.items[i].approvals[j].userid);
-          return true;
-        }
-        return false;
-      }
-    }
-  };
+  // ShitailistController.prototype.searchMyApprovals = function(data) {
+  //   console.log('ShitailistController searchMyApprovals Method');
+  //
+  //   // 賛同者がいなかったら非表示
+  //   if (!data.approvals) {
+  //     return false;
+  //   } else {
+  //     // 自分が賛同していたら(賛同者の中に自分が含まれていたら)表示
+  //     for (var i = 0; i < data.approvals.length; i++) {
+  //       if (data.approvals[i].userid === vm.ImatomoValue.profile.id) {
+  //         return true;
+  //       }
+  //     }
+  //   }
+  // };
 
   /**
    * 賛同する
    */
   ShitailistController.prototype.approval = function(id) {
     console.log('ShitailistController approval Method');
-    vm.ShitaiesService.approval(id);
+    $('button').prop('disabled', 'disabled');
+    vm.ShitaiesService.approval(id, function() {
+      $('button').prop('disabled', '');
+    });
   };
 
   /**
@@ -89,7 +88,10 @@
    */
   ShitailistController.prototype.cancel = function(id) {
     console.log('ShitailistController approval Method');
-    vm.ShitaiesService.cancel(id);
+    $('button').prop('disabled', 'disabled');
+    vm.ShitaiesService.cancel(id, function() {
+      $('button').prop('disabled', '');
+    });
   };
 
   /**
@@ -148,15 +150,12 @@
   };
 
   ShitailistController.prototype.searchMember = function(data) {
-    console.log('ShitailistController searchMember Method');
-
-    //「グループ：みんな」の公言は表示
     if (data.group === '') {
       return true;
     }
 
     // グループ一覧が存在しない場合は表示
-    if (vm.groupList !== undefined) {
+    if (!vm.groupList) {
       return true;
     }
 
@@ -173,6 +172,37 @@
 
     // 「グループ：自身が所属していないグループ」の公言は非表示
     return false;
+
+  };
+
+  ShitailistController.prototype.searchMyApprovals = function(data) {
+
+    if (vm.flag === 0) {
+      //「グループ：みんな」の公言は表示
+      return true;
+    }
+
+    if (vm.flag === 1) {
+      // 賛同者がいなかったら非表示
+      if (data.userid ===  vm.ImatomoValue.profile.id) {
+        return true;
+      }
+    }
+
+    if (vm.flag === 2) {
+      // 賛同者がいなかったら非表示
+      if (!data.approvals) {
+        return false;
+      } else {
+        // 自分が賛同していたら表示
+        for (var k = 0; k < data.approvals.length; k++) {
+          console.log(data.approvals);
+          if (data.approvals[k].userid === vm.ImatomoValue.profile.id) {
+            return true;
+          }
+        }
+      }
+    }
   };
 
   /**

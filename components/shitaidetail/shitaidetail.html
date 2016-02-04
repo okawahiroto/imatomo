@@ -21,7 +21,7 @@
     <div class="col-sm-10">
       <div class="panel panel-default">
         <div class="panel-body">
-          {{shitaidetail.time | date : 'yyyy年MM月dd日 (EEE)'}}
+          {{shitaidetail.time | date : 'yyyy年MM月dd日 HH時mm分 (EEE)'}}
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@
   <button type="button" class="btn btn-danger" ng-click="shitaidetail.cancel(shitaidetail.id)" ng-show="shitaidetail.isCancel(shitaidetail)">
     賛同を取り止める
   </button>
-  <button type="button" class="btn btn-info" ng-click="shitaidetail.shitaiDelete()" ng-show="shitaidetail.ImatomoValue.profile.id == shitaidetail.userid">
+  <button type="button" class="btn btn-danger" ng-click="shitaidetail.shitaiDelete()" ng-show="shitaidetail.ImatomoValue.profile.id == shitaidetail.userid">
     削除する
   </button>
 </div>

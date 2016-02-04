@@ -61,7 +61,7 @@
       /*
        * 賛同する
        */
-      approval: function(id) {
+      approval: function(id, aftfnc) {
         // 更新
         shitaiesArray.$loaded().then(function(x) {
           var s = shitaiesArray.$getRecord(id);
@@ -71,6 +71,9 @@
           s.approvals.push({userid : ImatomoValue.profile.id});
           s.lastApprovalUserid = ImatomoValue.profile.id;
           shitaiesArray.$save(s);
+          if (aftfnc) {
+            aftfnc();
+          }
         });
       },
 
@@ -141,6 +144,7 @@
         }
       });
 
+      // 通知
       pushCall(ImatomoValue);
 
     });
