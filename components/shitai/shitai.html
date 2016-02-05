@@ -2,12 +2,12 @@
 <form class="form-horizontal" name="shitais" ng-submit="shitai.register()" novalidate>
   <div class="form-group">
 
-    <label for="title" class="col-sm-2 control-label">公言</label>
+    <label for="title" class="col-sm-2 control-label">なにしたい？</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="title" placeholder="飲みに行きたい！！" ng-model="shitai.title" ng-maxlength="20" required>
     </div>
 
-    <label for="date" class="col-sm-2 control-label">期限</label>
+    <label for="date" class="col-sm-2 control-label">いつ？</label>
     <div class="col-sm-10">
       <p class="input-group">
         <input type="text" id="date" class="form-control" ng-model="shitai.date" is-open="shitai.opened" close-text="Close"
@@ -27,14 +27,14 @@
       <input type="text" class="form-control" id="place" placeholder="天文館" ng-model="shitai.place" ng-maxlength="20">
     </div>
 
-    <label for="group" class="col-sm-2 control-label">グループ</label>
+    <label for="group" class="col-sm-2 control-label">だれと？</label>
     <div class="col-sm-10">
       <select class="form-control" ng-model="shitai.groupList.groupid"
               ng-options="data.groupid as data.groupname for data in shitai.groupList">
       </select>
     </div>
 
-    <label for="comment" class="col-sm-2 control-label">備考</label>
+    <label for="comment" class="col-sm-2 control-label">コメント</label>
     <div class="col-sm-10">
       <textarea id="comment" rows="5" placeholder="" class="form-control" ng-model="shitai.comment"></textarea>
     </div>

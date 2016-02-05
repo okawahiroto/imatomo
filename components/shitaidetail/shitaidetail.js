@@ -14,7 +14,7 @@
     ])
     .controller('ShitaidetailController', ShitaidetailController);
 
-  ShitaidetailController.$inject = ['$location', '$routeParams', 'ImatomoValue', 'ShitaiesService', 'ProfilesService', 'GroupsService'];
+  ShitaidetailController.$inject = ['$location', '$routeParams', 'ImatomoValue', 'ShitaiesService', 'ProfilesService', 'GroupsService', '$uibModal'];
 
   /**
    * ShitaidetailController
@@ -22,7 +22,7 @@
    * @class ShitaidetailController
    * @constructor
    */
-  function ShitaidetailController($location, $routeParams, ImatomoValue, ShitaiesService, ProfilesService, GroupsService) {
+  function ShitaidetailController($location, $routeParams, ImatomoValue, ShitaiesService, ProfilesService, GroupsService, $uibModal) {
     console.log('ShitaidetailController Constructor');
     this.$location = $location;
     this.id = $routeParams.id;
@@ -30,6 +30,7 @@
     this.ShitaiesService = ShitaiesService;
     this.ProfilesService = ProfilesService;
     this.GroupsService = GroupsService;
+    this.$uibModal = $uibModal;
   }
 
   /**
@@ -91,23 +92,51 @@
   };
 
   /**
+   * 保存する
+   */
+  ShitaidetailController.prototype.shitaiSave = function(comment) {
+    console.log('ShitaidetailController shitaiSave Method');
+    // 備考更新
+    vm.ShitaiesService.seveComment(vm.id, comment);
+
+    // 一覧画面へ
+    vm.$location.path('/shitailist');
+  };
+
+  /**
    * 削除ボタン
    */
   ShitaidetailController.prototype.shitaiDelete = function() {
     console.log('ShitaidetailController shitaiDelete Method');
 
-    // したい一覧
-    var shitaiesArray = vm.ShitaiesService.findShitaies();
-
-    for (var i = 0; i < shitaiesArray.length; i++) {
-      if (vm.id === shitaiesArray[i].$id) {
-        console.log(shitaiesArray[i]);
-        shitaiesArray.$remove(i);
+    // 確認ダイアログ
+    var modalInstance = vm.$uibModal.open({
+      templateUrl: 'confirm-modal.html',
+      controller: 'ImatomoConfirm',
+      resolve: {
+        message: function() {
+          return '削除します。よろしいですか？';
+        }
       }
-    }
+    });
 
-    // 一覧画面へ
-    vm.$location.path('/shitailist');
+    modalInstance.result.then(
+      function() {
+        // キャンセルの場合は何もしない
+      }, function() {
+
+        // したい一覧
+        var shitaiesArray = vm.ShitaiesService.findShitaies();
+
+        for (var i = 0; i < shitaiesArray.length; i++) {
+          if (vm.id === shitaiesArray[i].$id) {
+            console.log(shitaiesArray[i]);
+            shitaiesArray.$remove(i);
+          }
+        }
+
+        vm.$location.path('/shitailist');
+      });
   };
 
   /**
@@ -174,6 +203,35 @@
       }
     });
     return isshow;
+  };
+
+  /**
+   * 今日からの日付差からフォーマット変更
+   */
+  ShitaidetailController.prototype.dateFormat = function(time) {
+
+    // まずは今日深夜０時を取得
+    var todaysEnd = new Date();
+    todaysEnd.setHours(23, 59, 59, 999);
+
+    // 今日判定
+    if (time < todaysEnd.getTime()) {
+      return '今日 HH:mm';
+    }
+
+    // 明日判定
+    todaysEnd.setTime(todaysEnd.getTime() + 86400000);
+    if (time < todaysEnd.getTime()) {
+      return '明日(EEE) HH:mm';
+    }
+
+    // 明後日判定
+    todaysEnd.setTime(todaysEnd.getTime() + 86400000);
+    if (time < todaysEnd.getTime()) {
+      return '明後日(EEE) HH:mm';
+    }
+
+    return 'M/dd (EEE) HH:mm';
   };
 
 })();

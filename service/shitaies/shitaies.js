@@ -94,7 +94,20 @@
             aftfnc();
           }
         });
+      },
+
+      /*
+       * 備考を更新する
+       */
+      seveComment: function(id, comment) {
+        // 更新
+        shitaiesArray.$loaded().then(function(x) {
+          var s = shitaiesArray.$getRecord(id);
+          s.comment = comment;
+          shitaiesArray.$save(s);
+        });
       }
+
     };
 
     // 自分が登録したときに、$addなのに $watch 'child_changed' が発火するためフラグ制御...
