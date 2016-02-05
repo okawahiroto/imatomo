@@ -21,7 +21,7 @@
         </div>
       </td>
       <td class="inline" userid={{data.userid}}></td>
-      <td class="inline">{{data.time | date : 'M/dd (EEE) HH:mm'}}</td>
+      <td class="inline">{{data.time | date : shitailist.dateFormat(data.time)}}</td>
       <!--<td class="inline">{{data.place}}</td>-->
       <td nowrap class="inline">
         <button type="button" class="btn btn-info" ng-click="shitailist.moveDetail(data.$id)" style="margin-right:20px;" uib-tooltip="詳細へ">
