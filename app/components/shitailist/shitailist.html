@@ -1,12 +1,12 @@
 <ul class="nav nav-tabs">
   <li class="active">
-    <a data-toggle="tab"  ng-click="shitailist.flag = 0;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+    <a data-toggle="tab" uib-tooltip="一覧" ng-click="shitailist.flag = 0;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
   </li>
   <li>
-    <a data-toggle="tab" ng-click="shitailist.flag = 1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+    <a data-toggle="tab" uib-tooltip="公言" ng-click="shitailist.flag = 1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
   </li>
   <li>
-    <a data-toggle="tab" ng-click="shitailist.flag = 2"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
+    <a data-toggle="tab" uib-tooltip="賛同" ng-click="shitailist.flag = 2"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a>
   </li>
 </ul>
 
@@ -24,7 +24,7 @@
       <td class="inline">{{data.time | date : 'M/dd (EEE) HH:mm'}}</td>
       <!--<td class="inline">{{data.place}}</td>-->
       <td nowrap class="inline">
-        <button type="button" class="btn btn-info" ng-click="shitailist.moveDetail(data.$id)" style="margin-right:20px;" uib-tooltip="詳細へ">
+        <button type="button" class="btn btn-info" ng-click="shitailist.moveDetail(data.$id)" style="margin-right:20px;" uib-tooltip="詳細">
           <i class="glyphicon glyphicon-info-sign"></i>
         </button>
         <button type="button" class="btn btn-primary right" ng-click="shitailist.approval(data.$id)" ng-show="shitailist.isApproval(data)" uib-tooltip="賛同する">
