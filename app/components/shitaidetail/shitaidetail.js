@@ -125,19 +125,18 @@
         // キャンセルの場合は何もしない
       }, function() {
 
-      // したい一覧
-      var shitaiesArray = vm.ShitaiesService.findShitaies();
+        // したい一覧
+        var shitaiesArray = vm.ShitaiesService.findShitaies();
 
-      for (var i = 0; i < shitaiesArray.length; i++) {
-        if (vm.id === shitaiesArray[i].$id) {
-          console.log(shitaiesArray[i]);
-          shitaiesArray.$remove(i);
+        for (var i = 0; i < shitaiesArray.length; i++) {
+          if (vm.id === shitaiesArray[i].$id) {
+            console.log(shitaiesArray[i]);
+            shitaiesArray.$remove(i);
+          }
         }
-      }
 
-      // 一覧画面へ
-      vm.$location.path('/shitailist');
-    });
+        vm.$location.path('/shitailist');
+      });
   };
 
   /**
