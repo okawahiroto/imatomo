@@ -151,7 +151,23 @@
       profiles.$loaded().then(function(x) {
         for (var i = 0; i < profiles.length; i++) {
           if (profiles[i].userid === newMemberId) {
-            toaster.pop('success', '仲間があらわれた！', profiles[i].username + ' さんがあなたに賛同しました。');
+            // toaster.pop('success', '仲間があらわれた！', profiles[i].username + ' さんがあなたに賛同しました。',
+            // '<img src="' + profiles[i].picture + '" />', null , 'template');
+
+            var bodyhtml = '';
+            bodyhtml += '<table><tr><td>';
+            bodyhtml += '<img src="' + profiles[i].picture + '" width="60" style="padding-right:5px;"/>';
+            bodyhtml += '</td><td>';
+            bodyhtml += profiles[i].username + ' さん<br>があなたに賛同しました。';
+            bodyhtml += '</td></tr></table>';
+
+            toaster.pop({
+              type: 'success',
+              //title: profiles[i].username + ' さんがあなたに賛同しました。',
+              body: bodyhtml,
+              showCloseButton: false,
+              bodyOutputType: 'trustedHtml' // trustedHtmlにしてもいいのかしらｗｗｗ　いやだめだよね、わかってます。
+            });
             break;
           }
         }
