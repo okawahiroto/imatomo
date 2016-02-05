@@ -14,7 +14,7 @@
     ])
     .controller('ShitaidetailController', ShitaidetailController);
 
-  ShitaidetailController.$inject = ['$location', '$routeParams', 'ImatomoValue', 'ShitaiesService', 'ProfilesService', 'GroupsService'];
+  ShitaidetailController.$inject = ['$location', '$routeParams', 'ImatomoValue', 'ShitaiesService', 'ProfilesService', 'GroupsService', '$uibModal'];
 
   /**
    * ShitaidetailController
@@ -22,7 +22,7 @@
    * @class ShitaidetailController
    * @constructor
    */
-  function ShitaidetailController($location, $routeParams, ImatomoValue, ShitaiesService, ProfilesService, GroupsService) {
+  function ShitaidetailController($location, $routeParams, ImatomoValue, ShitaiesService, ProfilesService, GroupsService, $uibModal) {
     console.log('ShitaidetailController Constructor');
     this.$location = $location;
     this.id = $routeParams.id;
@@ -30,6 +30,7 @@
     this.ShitaiesService = ShitaiesService;
     this.ProfilesService = ProfilesService;
     this.GroupsService = GroupsService;
+    this.$uibModal = $uibModal;
   }
 
   /**
@@ -96,18 +97,35 @@
   ShitaidetailController.prototype.shitaiDelete = function() {
     console.log('ShitaidetailController shitaiDelete Method');
 
-    // したい一覧
-    var shitaiesArray = vm.ShitaiesService.findShitaies();
-
-    for (var i = 0; i < shitaiesArray.length; i++) {
-      if (vm.id === shitaiesArray[i].$id) {
-        console.log(shitaiesArray[i]);
-        shitaiesArray.$remove(i);
+    // 確認ダイアログ
+    var modalInstance = vm.$uibModal.open({
+      templateUrl: 'confirm-modal.html',
+      controller: 'ImatomoConfirm',
+      resolve: {
+        message: function() {
+          return '削除します。よろしいですか？';
+        }
       }
-    }
+    });
 
-    // 一覧画面へ
-    vm.$location.path('/shitailist');
+    modalInstance.result.then(
+      function() {
+        // キャンセルの場合は何もしない
+      }, function() {
+
+      // したい一覧
+      var shitaiesArray = vm.ShitaiesService.findShitaies();
+
+      for (var i = 0; i < shitaiesArray.length; i++) {
+        if (vm.id === shitaiesArray[i].$id) {
+          console.log(shitaiesArray[i]);
+          shitaiesArray.$remove(i);
+        }
+      }
+
+      // 一覧画面へ
+      vm.$location.path('/shitailist');
+    });
   };
 
   /**

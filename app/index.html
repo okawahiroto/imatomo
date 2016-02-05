@@ -53,6 +53,17 @@
 
       <div ng-if="imatomo.ImatomoValue.profile">
 
+        <script type="text/ng-template" id="confirm-modal.html">
+          <div class="modal-header"><h3 class="modal-title">確認！</h3></div>
+          <div class="modal-body">
+            <p>{{message}}</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+          </div>
+        </script>
+
         <div ng-viewport></div>
 
         <div ng-include="'components/footer/footer.html'"></div>
@@ -118,6 +129,7 @@
         <script src="directives/userid/userid.js"></script>
         <script src="directives/userpicture/userpicture.js"></script>
         <script src="scripts/config.js"></script>
+        <script src="scripts/confirm.js"></script>
         <script src="scripts/value.js"></script>
         <script src="service/groups/groups.js"></script>
         <script src="service/gruntfiles/gruntfiles.js"></script>

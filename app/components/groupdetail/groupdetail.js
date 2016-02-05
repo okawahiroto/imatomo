@@ -13,7 +13,7 @@
     ])
     .controller('GroupdetailController', GroupdetailController);
 
-  GroupdetailController.$inject = ['$routeParams', '$location', 'ImatomoValue', 'ProfilesService', 'GroupsService'];
+  GroupdetailController.$inject = ['$routeParams', '$location', 'ImatomoValue', 'ProfilesService', 'GroupsService', '$uibModal'];
 
   /**
    * GroupdetailController
@@ -21,13 +21,14 @@
    * @class GroupdetailController
    * @constructor
    */
-  function GroupdetailController($routeParams, $location, ImatomoValue, ProfilesService, GroupsService) {
+  function GroupdetailController($routeParams, $location, ImatomoValue, ProfilesService, GroupsService, $uibModal) {
     console.log('GroupdetailController Constructor');
     this.id = $routeParams.id;
     this.$location = $location;
     this.ImatomoValue = ImatomoValue;
     this.ProfilesService = ProfilesService;
     this.GroupsService = GroupsService;
+    this.$uibModal = $uibModal;
   }
 
   /**
@@ -69,9 +70,26 @@
   GroupdetailController.prototype.dissolution = function() {
     console.log('GroupdetailController dissolution Method');
 
-    // サービス実行
-    vm.GroupsService.removeGroup(vm.group.$id);
-    vm.$location.path('group');
+    // 確認ダイアログ
+    var modalInstance = vm.$uibModal.open({
+      templateUrl: 'confirm-modal.html',
+      controller: 'ImatomoConfirm',
+      resolve: {
+        message: function() {
+          return 'グループを解散します。  ホントにいいの？寂しくない？(´･ω･`) ｼｮﾎﾞｰﾝ';
+        }
+      }
+    });
+
+    modalInstance.result.then(
+      function() {
+        // キャンセルの場合は何もしない
+      }, function() {
+        // サービス実行
+        vm.GroupsService.removeGroup(vm.group.$id);
+        vm.$location.path('group');
+      }
+    );
   };
 
   /**

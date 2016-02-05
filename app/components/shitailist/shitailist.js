@@ -13,7 +13,7 @@
     ])
     .controller('ShitailistController', ShitailistController);
 
-  ShitailistController.$inject = ['$location', 'ImatomoValue', 'ShitaiesService', 'GroupsService'];
+  ShitailistController.$inject = ['$location', 'ImatomoValue', 'ShitaiesService', 'GroupsService', '$uibModal'];
 
   /**
    * ShitailistController
@@ -21,12 +21,13 @@
    * @class ShitailistController
    * @constructor
    */
-  function ShitailistController($location, ImatomoValue, ShitaiesService, GroupsService) {
+  function ShitailistController($location, ImatomoValue, ShitaiesService, GroupsService, $uibModal) {
     console.log('ShitailistController Constructor');
     this.ShitaiesService = ShitaiesService;
     this.$location = $location;
     this.ImatomoValue = ImatomoValue;
     this.GroupsService = GroupsService;
+    this.$uibModal = $uibModal;
   }
 
   /**
@@ -91,6 +92,30 @@
     $('button').prop('disabled', 'disabled');
     vm.ShitaiesService.cancel(id, function() {
       $('button').prop('disabled', '');
+    });
+  };
+
+  /**
+   * 削除ボタン
+   */
+  ShitailistController.prototype.remove = function(data) {
+
+    // 確認ダイアログ
+    var modalInstance = vm.$uibModal.open({
+      templateUrl: 'confirm-modal.html',
+      controller: 'ImatomoConfirm',
+      resolve: {
+        message: function() {
+          return '削除します。よろしいですか？';
+        }
+      }
+    });
+    modalInstance.result.then(
+      function() {
+      // キャンセルの場合は何もしない
+    }, function() {
+      // 削除実行
+      vm.items.$remove(data);
     });
   };
 

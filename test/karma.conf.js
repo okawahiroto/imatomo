@@ -39,6 +39,7 @@ module.exports = function(config) {
       'app/directives/userid/userid.js',
       'app/directives/userpicture/userpicture.js',
       'app/scripts/config.js',
+      'app/scripts/confirm.js',
       'app/scripts/value.js',
       'app/service/groups/groups.js',
       'app/service/gruntfiles/gruntfiles.js',

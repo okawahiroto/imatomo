@@ -33,7 +33,7 @@
         <button type="button" class="btn btn-warning right" ng-click="shitailist.cancel(data.$id)" ng-show="shitailist.isCancel(data)" uib-tooltip="賛同を取り止める">
           <i class="glyphicon glyphicon-minus"></i>
         </button>
-        <button type="button" class="btn btn-danger right" ng-click="shitailist.items.$remove(data)" ng-show="shitailist.ImatomoValue.profile.id == data.userid" uib-tooltip="削除する">
+        <button type="button" class="btn btn-danger right" ng-click="shitailist.remove(data)" ng-show="shitailist.ImatomoValue.profile.id == data.userid" uib-tooltip="削除する">
           <i class="glyphicon glyphicon-trash"></i>
         </button>
       </td>

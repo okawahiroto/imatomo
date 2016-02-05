@@ -11,6 +11,7 @@
       'ngNewRouter',
       'imatomo.config',
       'imatomo.value',
+      'imatomo.confirm',
       'firebase',
       'toaster',
       'ngAnimate',
@@ -60,8 +61,7 @@
           if (!profile.name) {
             var modalInstance = $uibModal.open({
               animation: $scope.animationsEnabled,
-              templateUrl: 'myModalContent.html',
-              size: 'sm'
+              templateUrl: 'myModalContent.html'
             });
             return;
           }
