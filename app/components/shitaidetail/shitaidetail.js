@@ -91,6 +91,18 @@
   };
 
   /**
+   * 保存する
+   */
+  ShitaidetailController.prototype.shitaiSave = function(comment) {
+    console.log('ShitaidetailController shitaiSave Method');
+    // 備考更新
+    vm.ShitaiesService.seveComment(vm.id, comment);
+
+    // 一覧画面へ
+    vm.$location.path('/shitailist');
+  };
+
+  /**
    * 削除ボタン
    */
   ShitaidetailController.prototype.shitaiDelete = function() {
