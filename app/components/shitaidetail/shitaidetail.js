@@ -205,4 +205,33 @@
     return isshow;
   };
 
+  /**
+   * 今日からの日付差からフォーマット変更
+   */
+  ShitaidetailController.prototype.dateFormat = function(time) {
+
+    // まずは今日深夜０時を取得
+    var todaysEnd = new Date();
+    todaysEnd.setHours(23, 59, 59, 999);
+
+    // 今日判定
+    if (time < todaysEnd.getTime()) {
+      return '今日 HH:mm';
+    }
+
+    // 明日判定
+    todaysEnd.setTime(todaysEnd.getTime() + 86400000);
+    if (time < todaysEnd.getTime()) {
+      return '明日(EEE) HH:mm';
+    }
+
+    // 明後日判定
+    todaysEnd.setTime(todaysEnd.getTime() + 86400000);
+    if (time < todaysEnd.getTime()) {
+      return '明後日(EEE) HH:mm';
+    }
+
+    return 'M/dd (EEE) HH:mm';
+  };
+
 })();
