@@ -58,13 +58,15 @@
    * @private
    */
   var setShitaiItem = function (shitaiItem) {
-    vm.id          = shitaiItem.$id;
-    vm.userid      = shitaiItem.userid;
-    vm.title       = shitaiItem.title;
-    vm.time        = shitaiItem.time;
-    vm.place       = shitaiItem.place;
-    vm.comment     = shitaiItem.comment;
-    vm.createtimesstamp = shitaiItem.createtimesstamp;
+    // vm.id          = shitaiItem.$id;
+    // vm.userid      = shitaiItem.userid;
+    // vm.title       = shitaiItem.title;
+    // vm.time        = shitaiItem.time;
+    // vm.place       = shitaiItem.place;
+    // vm.comment     = shitaiItem.comment;
+    // vm.createtimesstamp = shitaiItem.createtimesstamp;
+
+    vm.shitai = shitaiItem;
 
     // 名称解決
     vm.ProfilesService.getProfile(shitaiItem.userid, function(profile) {
@@ -88,7 +90,7 @@
     });
 
     // 賛同者取得
-    vm.approvals = shitaiItem.approvals;
+    // vm.approvals = shitaiItem.approvals;
   };
 
   /**
@@ -97,7 +99,7 @@
   ShitaidetailController.prototype.shitaiSave = function(comment) {
     console.log('ShitaidetailController shitaiSave Method');
     // 備考更新
-    vm.ShitaiesService.seveComment(vm.id, comment);
+    vm.ShitaiesService.seveComment(vm.shitai.$id, comment);
 
     // 一覧画面へ
     vm.$location.path('/shitailist');
@@ -129,7 +131,7 @@
         var shitaiesArray = vm.ShitaiesService.findShitaies();
 
         for (var i = 0; i < shitaiesArray.length; i++) {
-          if (vm.id === shitaiesArray[i].$id) {
+          if (vm.shitai.$id === shitaiesArray[i].$id) {
             console.log(shitaiesArray[i]);
             shitaiesArray.$remove(i);
           }
@@ -160,20 +162,20 @@
   /**
    * 賛同ボタンを表示できるか検証する
    */
-  ShitaidetailController.prototype.isApproval = function(shitai) {
+  ShitaidetailController.prototype.isApproval = function() {
 
     // 自分が公言したものなら非表示
-    if (shitai.userid === vm.ImatomoValue.profile.id) {
+    if (vm.shitai.userid === vm.ImatomoValue.profile.id) {
       return false;
     }
 
     // 賛同がまだ０なら表示
-    if (!shitai.approvals) {
+    if (!vm.shitai.approvals) {
       return true;
     }
 
     var isshow = true;
-    shitai.approvals.forEach(function(s) {
+    vm.shitai.approvals.forEach(function(s) {
       if (s.userid === vm.ImatomoValue.profile.id) {
         isshow = false;
       }
@@ -184,20 +186,20 @@
   /**
    * キャンセルボタンを表示できるか検証する
    */
-  ShitaidetailController.prototype.isCancel = function(shitai) {
+  ShitaidetailController.prototype.isCancel = function() {
 
     // 自分が公言したものなら非表示
-    if (shitai.userid === vm.ImatomoValue.profile.id) {
+    if (vm.shitai.userid === vm.ImatomoValue.profile.id) {
       return false;
     }
 
     // 賛同がまだ０なら表示
-    if (!shitai.approvals) {
+    if (!vm.shitai.approvals) {
       return false;
     }
 
     var isshow = false;
-    shitai.approvals.forEach(function(s) {
+    vm.shitai.approvals.forEach(function(s) {
       if (s.userid === vm.ImatomoValue.profile.id) {
         isshow = true;
       }

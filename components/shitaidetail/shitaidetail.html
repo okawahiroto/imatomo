@@ -1,6 +1,6 @@
 <form class="form-horizontal">
 
-  <h1 class="text-center">{{shitaidetail.title}}</h1>
+  <h1 class="text-center">{{shitaidetail.shitai.title}}</h1>
 
   <div ng-if="shitaidetail.userpicture" class="text-center">
     <img ng-src="{{shitaidetail.userpicture}}" width="100"/>
@@ -21,7 +21,7 @@
     <div class="col-sm-10">
       <div class="panel panel-default">
         <div class="panel-body">
-          {{shitaidetail.time | date : shitaidetail.dateFormat(shitaidetail.time)}}
+          {{shitaidetail.shitai.time | date : shitaidetail.dateFormat(shitaidetail.shitai.time)}}
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
     <div class="col-sm-10">
       <div class="panel panel-default">
         <div class="panel-body">
-          {{shitaidetail.place}}
+          {{shitaidetail.shitai.place}}
         </div>
       </div>
     </div>
@@ -42,13 +42,13 @@
       </div>
     </div>
     <label class="col-sm-2 control-label">コメント</label>
-    <div class="col-sm-10" ng-show="shitaidetail.ImatomoValue.profile.id != shitaidetail.userid">
+    <div class="col-sm-10" ng-show="shitaidetail.ImatomoValue.profile.id != shitaidetail.shitai.userid">
       <div class="panel panel-default">
-        <pre style="border:none;background-color:#ffffff;">{{shitaidetail.comment}}</pre>
+        <pre style="border:none;background-color:#ffffff;">{{shitaidetail.shitai.comment}}</pre>
       </div>
     </div>
-    <div class="col-sm-10" ng-show="shitaidetail.ImatomoValue.profile.id == shitaidetail.userid">
-      <textarea id="comment" rows="5" placeholder="" class="form-control" ng-model="shitaidetail.comment">{{shitaidetail.comment}}</textarea>
+    <div class="col-sm-10" ng-show="shitaidetail.ImatomoValue.profile.id == shitaidetail.shitai.userid">
+      <textarea id="comment" rows="5" placeholder="" class="form-control" ng-model="shitaidetail.shitai.comment">{{shitaidetail.shitai.comment}}</textarea>
     </div>
   </div>
 
@@ -57,11 +57,11 @@
   <div class="form-group">
     <label class="col-sm-2 control-label">いまとも</label>
     <div class="col-sm-10">
-      <div class="panel panel-default" ng-if="shitaidetail.approvals == undefined">
+      <div class="panel panel-default" ng-if="shitaidetail.shitai.approvals == undefined">
         <div class="panel-body">だれもいません</div>
       </div>
       <ul class="list-group">
-        <li class="list-group-item" ng-repeat="data in shitaidetail.approvals">
+        <li class="list-group-item" ng-repeat="data in shitaidetail.shitai.approvals">
           <div userpicture={{data.userid}} userid={{data.userid}}></div>
         </li>
       </ul>
@@ -70,16 +70,16 @@
 </form>
 
 <div class="form-group">
-  <button type="button" class="btn btn-primary" ng-click="shitaidetail.approval(shitaidetail.id)" ng-show="shitaidetail.isApproval(shitaidetail)">
+  <button type="button" class="btn btn-primary" ng-click="shitaidetail.approval(shitaidetail.shitai.$id)" ng-show="shitaidetail.isApproval()">
     賛同する
   </button>
-  <button type="button" class="btn btn-danger" ng-click="shitaidetail.cancel(shitaidetail.id)" ng-show="shitaidetail.isCancel(shitaidetail)">
+  <button type="button" class="btn btn-danger" ng-click="shitaidetail.cancel(shitaidetail.shitai.$id)" ng-show="shitaidetail.isCancel()">
     賛同を取り止める
   </button>
-  <button type="button" class="btn btn-primary" ng-click="shitaidetail.shitaiSave(shitaidetail.comment)" ng-show="shitaidetail.ImatomoValue.profile.id == shitaidetail.userid">
+  <button type="button" class="btn btn-primary" ng-click="shitaidetail.shitaiSave(shitaidetail.shitai.comment)" ng-show="shitaidetail.ImatomoValue.profile.id == shitaidetail.shitai.userid">
     保存する
   </button>
-  <button type="button" class="btn btn-danger" ng-click="shitaidetail.shitaiDelete()" ng-show="shitaidetail.ImatomoValue.profile.id == shitaidetail.userid">
+  <button type="button" class="btn btn-danger" ng-click="shitaidetail.shitaiDelete()" ng-show="shitaidetail.ImatomoValue.profile.id == shitaidetail.shitai.userid">
     削除する
   </button>
 </div>

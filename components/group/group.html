@@ -1,8 +1,23 @@
+<ul class="nav nav-tabs">
+  <li class="active">
+    <a data-toggle="tab" ng-click="group.criteria={creatorFilter : undefined, memberFilted : false}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+  </li>
+  <li>
+    <a data-toggle="tab" ng-click="group.criteria={creatorFilter : {createuserid : group.ImatomoValue.profile.id}, memberFilted : false}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+  </li>
+  <li>
+    <a data-toggle="tab" ng-click="group.criteria={creatorFilter : undefined, memberFilted : true}"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a>
+  </li>
+</ul>
 <table class="table table-striped">
-    <tr ng-repeat="data in group.items">
+    <tr ng-repeat="data in group.items | filter: group.criteria.creatorFilter" ng-if="group.filtedMember(data)">
       <td>
         <span class="badge">{{data.members ? data.members.length : 0 }}</span>
         {{data.groupname}}
+      </td>
+      <td>
+        created by
+        <span userpicture={{data.createuserid}} userid="{{data.createuserid}}" />
       </td>
       <td>
         <button type="button" class="btn btn-info" ng-click="group.moveDetail(data.$id)" style="margin-right:20px;" uib-tooltip="詳細">
