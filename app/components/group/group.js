@@ -39,6 +39,7 @@
 
     var groups = vm.GroupsService.findGroups();
     vm.items = groups;
+    vm.criteria = {creatorFilter : undefined, memberFilted : false};
   };
 
   /**
@@ -62,6 +63,30 @@
    */
   GroupController.prototype.moveDetail = function(id) {
     vm.$location.path('/groupdetail/' + id);
+  };
+
+  /**
+   * 自分がメンバーになってるグループに絞る
+   */
+  GroupController.prototype.filtedMember = function(data) {
+
+    if (!vm.criteria.memberFilted) {
+      return true;
+    }
+
+    if (!data.members) {
+      return false;
+    }
+
+    for (var i = 0; i < data.members.length; i++) {
+      if (data.members[i].userid === vm.ImatomoValue.profile.id) {
+        if (data.createuserid !== vm.ImatomoValue.profile.id) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   };
 
   /**
