@@ -2,7 +2,9 @@
     <tr ng-repeat="data in group.items">
       <td>
         <span class="badge">{{data.members ? data.members.length : 0 }}</span>
+        <span>
         {{data.groupname}}
+        </span>
       </td>
       <td>
         <button type="button" class="btn btn-info" ng-click="group.moveDetail(data.$id)" style="margin-right:20px;" uib-tooltip="詳細">
