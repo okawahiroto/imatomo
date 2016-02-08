@@ -14,7 +14,7 @@
 
   ShitaiesService.$inject = ['$firebaseArray', 'ImatomoValue', 'ProfilesService', 'toaster'];
 
-  var ref = new Firebase('https://resplendent-inferno-2076.firebaseio.com/shitaies');
+  var ref = new Firebase('https://imatomo.firebaseio.com/shitaies');
 
   /**
    * ShitaiesService

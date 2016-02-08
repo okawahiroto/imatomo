@@ -20,7 +20,7 @@
    */
   function ProfilesService($firebaseArray) {
 
-    var ref = new Firebase('https://resplendent-inferno-2076.firebaseio.com/profiles');
+    var ref = new Firebase('https://imatomo.firebaseio.com/profiles');
     var profileArray = $firebaseArray(ref);
 
     var profilesService = {
