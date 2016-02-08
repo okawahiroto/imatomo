@@ -91,8 +91,13 @@ body {
 
 @media screen and (max-width: 600px) {
 	table.shitaies tr {
+    /*
     border-right:medium solid #babaee;
 		border-bottom:medium solid #babaee;
+    */
+    border-top:medium solid #ffffff;
+    border-bottom:medium solid #ffffff;
+    border-width: 5px;
 	}
 	table.shitaies tr td.inline {
 		display:list-item;

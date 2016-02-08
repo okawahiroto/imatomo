@@ -22,7 +22,7 @@
    */
   function GroupsService($firebaseArray, ImatomoValue) {
 
-    var ref = new Firebase('https://resplendent-inferno-2076.firebaseio.com/groups');
+    var ref = new Firebase('https://imatomo.firebaseio.com/groups');
     var groupsArray = $firebaseArray(ref);
 
     var groupsService = {
