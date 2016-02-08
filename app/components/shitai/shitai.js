@@ -71,6 +71,7 @@
     // 期限に関する設定
     var currentTimestamp = new Date();
     vm.today = currentTimestamp;
+    vm.date = currentTimestamp;
     vm.time = new Date().setHours(currentTimestamp.getHours() + 1, 0, 0, 0);
   };
 

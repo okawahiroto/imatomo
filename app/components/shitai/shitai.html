@@ -10,12 +10,23 @@
     <label for="date" class="col-sm-2 control-label">いつ？</label>
     <div class="col-sm-10">
       <p class="input-group">
-        <input type="text" id="date" class="form-control" ng-model="shitai.date" is-open="shitai.opened" close-text="Close"
-          datepicker-options="shitai.datePickerOptions" min-date="shitai.today" uib-datepicker-popup="{{'yyyy年M月d日 (EEE)'}}"
-          ng-readonly="true" style="background-color:#ffffff;" required/>
+        <input type="text" id="date" class="form-control" ng-model="shitai.date" ng-click="shitai.opened=true;" ng-readonly="true"
+          datepicker-options="shitai.datePickerOptions" min-date="shitai.today"
+          uib-datepicker-popup="{{'yyyy年M月d日 (EEE)'}}"
+          datepicker-options = "{showWeeks : false}"
+          is-open="shitai.opened"
+          current-text="本日"
+          clear-text="クリア"
+          close-text="閉じる"
+          style="background-color:#ffffff;"
+          required
+
+          />
+        <!--
         <span class="input-group-btn">
           <button type="button" class="btn btn-default" ng-click="shitai.opened=true;"><i class="glyphicon glyphicon-calendar"></i></button>
         </span>
+      -->
       </p>
       <p class="input-group">
         <uib-timepicker ng-model="shitai.time" hour-step="1" minute-step="30" arrowkeys="false" show-meridian="false"/>

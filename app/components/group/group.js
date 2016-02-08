@@ -80,9 +80,7 @@
 
     for (var i = 0; i < data.members.length; i++) {
       if (data.members[i].userid === vm.ImatomoValue.profile.id) {
-        if (data.createuserid !== vm.ImatomoValue.profile.id) {
-          return true;
-        }
+        return true;
       }
     }
 
@@ -97,12 +95,4 @@
    */
   var vm;
 
-  /**
-   * @method closeAlert
-   */
-  GroupController.prototype.closeAlert = function () {
-    console.log('close');
-    vm.status = '';
-    vm.message = '';
-  };
 })();
