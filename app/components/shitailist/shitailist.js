@@ -57,22 +57,6 @@
     vm.filterDate = new Date().getTime();
   };
 
-  // ShitailistController.prototype.searchMyApprovals = function(data) {
-  //   console.log('ShitailistController searchMyApprovals Method');
-  //
-  //   // 賛同者がいなかったら非表示
-  //   if (!data.approvals) {
-  //     return false;
-  //   } else {
-  //     // 自分が賛同していたら(賛同者の中に自分が含まれていたら)表示
-  //     for (var i = 0; i < data.approvals.length; i++) {
-  //       if (data.approvals[i].userid === vm.ImatomoValue.profile.id) {
-  //         return true;
-  //       }
-  //     }
-  //   }
-  // };
-
   /**
    * 賛同する
    */
@@ -174,6 +158,9 @@
     vm.$location.path('/shitaidetail/' + id);
   };
 
+  /**
+   * 一覧に自分が所属しているグループの公言のみ表示する
+   */
   ShitailistController.prototype.searchMember = function(data) {
     if (data.group === '') {
       return true;
@@ -197,23 +184,27 @@
 
     // 「グループ：自身が所属していないグループ」の公言は非表示
     return false;
-
   };
 
+  /**
+   * 一覧に自分の公言、自分が賛同している公言を表示
+   */
   ShitailistController.prototype.searchMyApprovals = function(data) {
 
+    // 左のタブ(一覧タブ)をクリックしたら、すべて表示(自分が所属しているグループの公言のみ表示)
     if (vm.flag === 0) {
-      //「グループ：みんな」の公言は表示
       return true;
     }
 
+    // 真ん中のタブ(自分タブ)をクリックしたら、一覧に自分が公言したものを表示
     if (vm.flag === 1) {
-      // 賛同者がいなかったら非表示
+      // データのuseridとpurofileのidが等しいものを表示
       if (data.userid ===  vm.ImatomoValue.profile.id) {
         return true;
       }
     }
 
+    // 右のタブ(賛同タブ)をクリックしたら、一覧に自分が賛同したものを表示
     if (vm.flag === 2) {
       // 賛同者がいなかったら非表示
       if (!data.approvals) {
