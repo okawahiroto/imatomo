@@ -94,18 +94,6 @@
             aftfnc();
           }
         });
-      },
-
-      /*
-       * 備考を更新する
-       */
-      seveComment: function(id, comment) {
-        // 更新
-        shitaiesArray.$loaded().then(function(x) {
-          var s = shitaiesArray.$getRecord(id);
-          s.comment = comment;
-          shitaiesArray.$save(s);
-        });
       }
 
     };

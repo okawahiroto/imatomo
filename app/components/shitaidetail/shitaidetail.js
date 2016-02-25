@@ -58,16 +58,9 @@
    * @private
    */
   var setShitaiItem = function (shitaiItem) {
-    // vm.id          = shitaiItem.$id;
-    // vm.userid      = shitaiItem.userid;
-    // vm.title       = shitaiItem.title;
-    // vm.time        = shitaiItem.time;
-    // vm.place       = shitaiItem.place;
-    // vm.comment     = shitaiItem.comment;
-    // vm.createtimesstamp = shitaiItem.createtimesstamp;
 
     vm.shitai = shitaiItem;
-
+    vm.comment = vm.shitai.comment;
     // 名称解決
     vm.ProfilesService.getProfile(shitaiItem.userid, function(profile) {
       if (profile) {
@@ -89,17 +82,19 @@
       vm.group = groupname;
     });
 
-    // 賛同者取得
-    // vm.approvals = shitaiItem.approvals;
   };
 
   /**
    * 保存する
    */
-  ShitaidetailController.prototype.shitaiSave = function(comment) {
+  ShitaidetailController.prototype.shitaiSave = function() {
     console.log('ShitaidetailController shitaiSave Method');
+
+    // 画面値をモデルに反映
+    vm.shitai.comment = vm.comment;
+
     // 備考更新
-    vm.ShitaiesService.seveComment(vm.shitai.$id, comment);
+    vm.ShitaiesService.findShitaies().$save(vm.shitai);
 
     // 一覧画面へ
     vm.$location.path('/shitailist');
@@ -127,16 +122,7 @@
         // キャンセルの場合は何もしない
       }, function() {
 
-        // したい一覧
-        var shitaiesArray = vm.ShitaiesService.findShitaies();
-
-        for (var i = 0; i < shitaiesArray.length; i++) {
-          if (vm.shitai.$id === shitaiesArray[i].$id) {
-            console.log(shitaiesArray[i]);
-            shitaiesArray.$remove(i);
-          }
-        }
-
+        vm.ShitaiesService.findShitaies().$remove(vm.shitai);
         vm.$location.path('/shitailist');
       });
   };

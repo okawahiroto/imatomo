@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="col-sm-10" ng-show="shitaidetail.ImatomoValue.profile.id == shitaidetail.shitai.userid">
-      <textarea id="comment" rows="5" placeholder="" class="form-control" ng-model="shitaidetail.shitai.comment">{{shitaidetail.shitai.comment}}</textarea>
+      <textarea id="comment" rows="5" placeholder="" class="form-control" ng-model="shitaidetail.comment">{{shitaidetail.comment}}</textarea>
     </div>
   </div>
 
@@ -76,7 +76,7 @@
   <button type="button" class="btn btn-danger" ng-click="shitaidetail.cancel(shitaidetail.shitai.$id)" ng-show="shitaidetail.isCancel()">
     賛同を取り止める
   </button>
-  <button type="button" class="btn btn-primary" ng-click="shitaidetail.shitaiSave(shitaidetail.shitai.comment)" ng-show="shitaidetail.ImatomoValue.profile.id == shitaidetail.shitai.userid">
+  <button type="button" class="btn btn-primary" ng-click="shitaidetail.shitaiSave()" ng-show="shitaidetail.ImatomoValue.profile.id == shitaidetail.shitai.userid">
     保存する
   </button>
   <button type="button" class="btn btn-danger" ng-click="shitaidetail.shitaiDelete()" ng-show="shitaidetail.ImatomoValue.profile.id == shitaidetail.shitai.userid">
